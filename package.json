@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "react-input-mask": "^2.0.4",
+    "react-intl": "^6.6.5"
+  },
+  "devDependencies": {
+    "@types/react-input-mask": "^3.0.5"
+  }
+}
