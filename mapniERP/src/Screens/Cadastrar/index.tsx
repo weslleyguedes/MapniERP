@@ -82,13 +82,11 @@ width:100%;
 `
 const ContainerStatusCliente = styled.div`
 display:flex;
-margin-bottom:30px;
-
+margin-bottom:25px;
 div {
   display:inline-block;
   vertical-align:middle;
   margin-right:5px;
-
 }
 
 & div:nth-child(n+2) {
@@ -151,7 +149,6 @@ flex-wrap:wrap;
 gap:10px;
 width:100%;
 margin-bottom:25px;
-
 `
 const Linha1Matriculas = styled.div`
 display:flex;
@@ -195,11 +192,12 @@ button {
   border:1px solid var(--preto-padrao);
 }
 button:hover {
-  background-color:var(--amarelo-hover);
-  color:var(--preto-padrao);
+  background-color:#00000099;
+  color:#ffffff;
 }
 & > div:last-child button:hover {
-  background-color:#c9eff9;
+  background-color:#00000099;
+  color:#ffffff;
 }
 `
 //ESTILOS DOS ICONES
@@ -209,6 +207,7 @@ const TrashIcon = styled(LuTrash)`
  color:#cd6b6b;
  cursor:pointer;
  font-size:20px;
+ transition:.2s;
  &:hover {
   color:red;
  }
@@ -222,6 +221,45 @@ color:#004b79;
 font-size:19px;
 `
 const RepLegalIcon = styled(BsPeople)`
+ color:#004b79;
+ font-size:18px;
+`
+const SetaDireitaIcon = styled(IoIosArrowDropdown)`
+font-size:18px;
+color:#004b79;
+cursor:pointer;
+transition:.3s;
+&:hover {
+  transform:scale(1.08);
+}
+`
+const SetaBaixoIcon = styled(IoIosArrowDropright)`
+font-size:18px;
+color:#004b79;
+cursor:pointer;
+transition:.3s;
+&:hover {
+  transform:scale(1.08);
+}
+`
+const IconePhone = styled(BsPhone)`
+ color:#004b79;
+ font-size:18px;
+`
+const AddIcon = styled(FiPlusCircle)`
+ color:#004b79;
+ font-size:16px;
+ cursor:pointer;
+ transition:.3s;
+&:hover {
+  transform:scale(1.08);
+}
+`
+const EnderecoIcon = styled(IoLocationOutline)`
+ color:#004b79;
+ font-size:18px;
+`
+const DoubleArrow = styled(MdKeyboardDoubleArrowRight)`
  color:#004b79;
  font-size:18px;
 `
@@ -243,9 +281,34 @@ const Cadastrar = () =>  {
 
   const onChangeContato = (index: number, campo: string, valor: string) => {
     const newContato = [...criaContato];
-    newContato[index] = { ...newContato[index], [campo]: valor };
+    newContato[index] = {...newContato[index], [campo]: valor };
     setCriaContato(newContato);
 }
+
+  const excluirContato = (index:number) => {
+    const novosContatos = [...criaContato];
+    novosContatos.splice(index, 1); // Remove o contato na posição do índice
+    setCriaContato(novosContatos);
+}
+
+  const toggleEndereco = () => {
+    setAbreEndereco(!abreEndereco)
+}
+
+  const addMatricula = () => {
+      setClienteMatricula([...clienteMatricula, {especie:"", numero:"", salario:"", uf:"", senha:"", tipoConta:"", banco:"", agencia:"", conta:""}])
+  }
+
+  const onChangeMatricula = (index:number, campo:string, valor:string) => {
+    const newMatricula = [...clienteMatricula];
+    newMatricula[index] = {...newMatricula[index],[campo]:valor}
+  }
+
+  const excluirMatricula = (index:number) => {
+    const novasMatriculas = [...clienteMatricula];
+    novasMatriculas.splice(index,1);
+    setClienteMatricula(novasMatriculas);
+  }
 
   // STATES DE DADOS CLIENTE
 
@@ -280,6 +343,7 @@ const Cadastrar = () =>  {
 
   // STATES DE ENDEREÇO CLIENTE
 
+  const [abreEndereco,setAbreEndereco] = useState(false)
   const [clienteCEP, setClienteCEP] = useState<string>('')
   const [clienteLogradouro, setClienteLogradouro] = useState<string>('')
   const [clienteNum, setClienteNum] = useState<string>('')
@@ -290,15 +354,7 @@ const Cadastrar = () =>  {
 
   // STATES BENEFICIOS CLIENTE
 
-  const [clienteEspecie, setClienteEspecie] = useState<string>('')
-  const [clienteMatricula, setClienteMatricula] = useState<string>('')
-  const [clienteSalario, setClienteSalario] = useState<string>('')
-  const [clienteMatriculaUF, setClienteMatriculaUF] = useState<string>('')
-  const [clienteMatriculaSenha, setClienteMatriculaSenha] = useState<string>('')
-  const [clienteTipoConta, setClienteTipoConta] = useState<string>('')
-  const [clienteBanco, setClienteBanco] = useState<string>('')
-  const [clienteAgencia, setClienteAgencia] = useState<string>('')
-  const [clienteConta, setClienteConta] = useState<string>('')
+  const [clienteMatricula, setClienteMatricula] = useState<{especie:string; numero:string; salario:string; uf:string; senha:string; tipoConta:string; banco:string, agencia:string, conta:string}[]>([])
 
   // STATE FECHA MODAL
 
@@ -308,7 +364,7 @@ const Cadastrar = () =>  {
     <>
     {modalAberta && (
       <>
-      <TituloCSS><PersonIcon/> Dados do Cliente</TituloCSS>
+          <TituloCSS><PersonIcon/> Dados do Cliente</TituloCSS>
         <ContainerForm noValidate autoComplete="off" onSubmit={salvarCliente}>
           <ContainerDadosCliente>
             <Linha1Cliente>
@@ -444,9 +500,9 @@ const Cadastrar = () =>  {
               <label>Cliente está na Blacklist</label>
             </div>
 
-            </ContainerStatusCliente>
+          </ContainerStatusCliente>
 
-          <TituloCSS><RepLegalIcon/>Representante Legal {mostraRepLegal ? (<IoIosArrowDropdown onClick={toggleRepLegal} fontSize={19} color="#004b79"/>) : (<IoIosArrowDropright color="#004b79" fontSize={19} onClick={toggleRepLegal}/>)} </TituloCSS>
+          <TituloCSS><RepLegalIcon/>Representante Legal {mostraRepLegal ? (<SetaDireitaIcon onClick={toggleRepLegal} />) : (<SetaBaixoIcon onClick={toggleRepLegal}/>)} </TituloCSS>
           {mostraRepLegal && (
           <ContainerRepLegal>
             <div>
@@ -468,39 +524,9 @@ const Cadastrar = () =>  {
           </ContainerRepLegal>
         )}
 
-          <TituloCSS><BsPhone color="#004b79" fontSize={18}/>Contatos <FiPlusCircle onClick={addContato} color="#004b79" fontSize={18}/></TituloCSS>
-          {criaContato.map((contato,index) => (
-          <ContainerContato key={index}>
-                <div>
-                  <label>Telefone</label>
-                  <CampoTexto
-                  tipo="tel"
-                  valor={contato.telefone}
-                  onChange={(valor) => onChangeContato(index,'telefone', valor)}
-                  />
-                </div>
-                <div>
-                  <label>Tipo</label>
-                  <CampoTexto
-                  tipo="text"
-                  valor={contato.tipo}
-                  onChange={(valor)=> onChangeContato(index,'tipo', valor)}
-                  />
-                </div>
-                <div>
-                  <label>Uso</label>
-                  <CampoTexto
-                  tipo="text"
-                  valor={contato.uso}
-                  onChange={(valor) => onChangeContato(index, 'uso', valor)}
-                  />
-                </div>
-                <div><TrashIcon /></div>
-          </ContainerContato>
-        ))}
-
-          <TituloCSS><IoLocationOutline color="#004b79" fontSize={18}/>Endereço</TituloCSS>
-          <ContainerEnderecoCliente>
+          <TituloCSS><EnderecoIcon/>Endereço {abreEndereco ? (<SetaDireitaIcon onClick={toggleEndereco}/>) : (<SetaBaixoIcon onClick={toggleEndereco}/>)}</TituloCSS>
+          {abreEndereco && (
+            <ContainerEnderecoCliente>
             <Linha1Endereco>
               <div>
               <label>CEP</label>
@@ -562,49 +588,82 @@ const Cadastrar = () =>  {
               </div>
             </Linha2Endereco>
           </ContainerEnderecoCliente>
+          )}
 
-          <TituloCSS><MdKeyboardDoubleArrowRight color="#004b79" fontSize={18}/> Matriculas</TituloCSS>
-          <ContainerMatriculas>
+          <TituloCSS><IconePhone/>Contatos <AddIcon onClick={addContato}/></TituloCSS>
+          {criaContato.map((contato,index) => (
+          <ContainerContato key={index}>
+                <div>
+                  <label>Telefone</label>
+                  <CampoTexto
+                  tipo="tel"
+                  valor={contato.telefone}
+                  onChange={(valor) => onChangeContato(index,'telefone', valor)}
+                  />
+                </div>
+                <div>
+                  <label>Tipo</label>
+                  <CampoTexto
+                  tipo="text"
+                  valor={contato.tipo}
+                  onChange={(valor)=> onChangeContato(index,'tipo', valor)}
+                  />
+                </div>
+                <div>
+                  <label>Uso</label>
+                  <CampoTexto
+                  tipo="text"
+                  valor={contato.uso}
+                  onChange={(valor) => onChangeContato(index, 'uso', valor)}
+                  />
+                </div>
+                <div><TrashIcon onClick={() => excluirContato(index)}/></div>
+          </ContainerContato>
+        ))}
+
+          <TituloCSS><DoubleArrow/> Matriculas <AddIcon onClick={addMatricula}/></TituloCSS>
+          {clienteMatricula.map((matricula,index) => (
+          <ContainerMatriculas key={index}>
+            <TrashIcon onClick={() => excluirMatricula(index)}/>
             <Linha1Matriculas>
               <div>
                 <label>Espécie</label>
                 <CampoTexto
                 tipo="text"
-                valor={clienteEspecie}
-                onChange={setClienteEspecie}
+                valor={matricula.especie}
+                onChange={(valor) => onChangeMatricula(index,'especie', valor) }
                 />
               </div>
               <div>
                 <label>Nº Matricula</label>
                 <CampoTexto
                 tipo="text"
-                valor={clienteMatricula}
-                onChange={setClienteMatricula}
+                valor={matricula.numero}
+                onChange={(valor) => onChangeMatricula(index,'numero',valor)}
                 />
               </div>
-
               <div>
                 <label>Salário</label>
                 <CampoTexto
                 tipo="text"
-                valor={clienteSalario}
-                onChange={setClienteSalario}
+                valor={matricula.salario}
+                onChange={(valor) => onChangeMatricula(index,'salario',valor)}
                 />
               </div>
               <div>
                 <label>UF</label>
                 <CampoTexto
                 tipo="text"
-                valor={clienteMatriculaUF}
-                onChange={setClienteMatriculaUF}
+                valor={matricula.uf}
+                onChange={(valor) => onChangeContato (index,'uf',valor)}
                 />
               </div>
               <div>
                 <label>Senha</label>
                 <CampoTexto
                 tipo="text"
-                valor={clienteMatriculaSenha}
-                onChange={setClienteMatriculaSenha}
+                valor={matricula.senha}
+                onChange={(valor) => onChangeMatricula(index,'senha', valor)}
                 />
               </div>
             </Linha1Matriculas>
@@ -613,36 +672,37 @@ const Cadastrar = () =>  {
                 <label>Tipo Conta</label>
                 <CampoTexto
                 tipo="text"
-                valor={clienteTipoConta}
-                onChange={setClienteTipoConta}
+                valor={matricula.tipoConta}
+                onChange={(valor) => onChangeMatricula(index,'tipoConta',valor)}
                 />
               </div>
               <div>
               <label>Banco</label>
                 <CampoTexto
                 tipo="text"
-                valor={clienteBanco}
-                onChange={setClienteBanco}
+                valor={matricula.banco}
+                onChange={(valor) => onChangeMatricula(index,'banco', valor)}
                 />
               </div>
               <div>
               <label>Agência</label>
                 <CampoTexto
                 tipo="text"
-                valor={clienteAgencia}
-                onChange={setClienteAgencia}
+                valor={matricula.agencia}
+                onChange={(valor) => onChangeMatricula(index,'agencia', valor)}
                 />
               </div>
               <div>
               <label>Conta</label>
                 <CampoTexto
                 tipo="text"
-                valor={clienteConta}
-                onChange={setClienteConta}
+                valor={matricula.conta}
+                onChange={(valor) => onChangeMatricula(index,'conta',valor)}
                 />
               </div>
             </Linha2Matriculas>
           </ContainerMatriculas>
+          ))}
 
           <ContainerBotoesSalvarVoltar>
           <div>

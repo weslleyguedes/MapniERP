@@ -25,10 +25,11 @@ const Container = styled.div`
     z-index:1;
   }
   button:hover {
-    background-color:var(--vermelho-erro);
+    background-color:#e22a2a;
     color:white;
   }
 `
+
 const Overlay = styled.div`
   position:fixed;
   top:0;
