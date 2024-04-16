@@ -1,6 +1,4 @@
 import styled from "styled-components"
-import { IoMdClose } from "react-icons/io";
-import Botao from "../Botao";
 
 const Container = styled.div`
   position: fixed;
@@ -14,22 +12,7 @@ const Container = styled.div`
   width:900px;
   max-height:550px;
   overflow-y:auto;
-  button {
-    background-color:transparent;
-    color:black;
-    padding:4px 6px !important;
-    position:absolute;
-    top:15px;
-    right:16px;
-    margin-right:20px;
-    z-index:1;
-  }
-  button:hover {
-    background-color:#e22a2a;
-    color:white;
-  }
 `
-
 const Overlay = styled.div`
   position:fixed;
   top:0;
@@ -51,7 +34,6 @@ const Modal = ({children, alteraModal}:Props) => {
     <>
       <Overlay onClick={alteraModal}/>
       <Container>
-          <Botao onClick={alteraModal}><IoMdClose fontSize={15}/></Botao>
           {children}
       </Container>
     </>
