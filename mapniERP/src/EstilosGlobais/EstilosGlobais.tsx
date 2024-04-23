@@ -26,6 +26,7 @@ const EstilosGlobais= createGlobalStyle`
   --vermelho-erro:#e22a2a;
   --cinza-borda-input:#83838380;
   --preto-hover-input:#000000b3;
+  --azul-icones:#004b79;
 }
 
 html {

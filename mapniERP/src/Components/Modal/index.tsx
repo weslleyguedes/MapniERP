@@ -24,7 +24,6 @@ const Overlay = styled.div`
 `
 interface Props {
   children:React.ReactNode;
-  open?:boolean;
   alteraModal:() => void;
 }
 
@@ -32,9 +31,9 @@ const Modal = ({children, alteraModal}:Props) => {
 
   return (
     <>
-      <Overlay onClick={alteraModal}/>
+    <Overlay onClick={alteraModal}/>
       <Container>
-          {children}
+        {children}
       </Container>
     </>
 

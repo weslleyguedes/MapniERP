@@ -1,3 +1,4 @@
+import { ChangeEvent } from "react";
 import styled from "styled-components"
 
 const Container = styled.div`
@@ -9,7 +10,6 @@ padding:12px;
 margin:15px 0 5px 0;
 }
 `
-
 interface Props {
   label?:string;
   checked?:boolean;
@@ -17,28 +17,32 @@ interface Props {
   placeholder?:string;
   valor?:string | number;
   obrigatorio?: boolean;
-  onChange:(value:string) => void;
+  onChange?:(e:ChangeEvent<HTMLInputElement>) => void;
   minCaracteres?:number;
   maxCaracteres?:number;
   readOnly?:boolean;
+  onFocus?:() => void;
+  
 }
 
-const CampoTexto = ({label,readOnly,checked,tipo,placeholder,valor,obrigatorio,onChange,minCaracteres,maxCaracteres} : Props) => {
+const CampoTexto = ({label,readOnly,checked,tipo,placeholder,valor,obrigatorio,onChange,onFocus,minCaracteres,maxCaracteres} : Props) => {
+
 
   return (
     <Container>
         <label>{label}</label>
-        <input
-        readOnly={readOnly}
-        checked={checked}
-        type={tipo}
-        placeholder={placeholder}
-        value={valor}
-        required={obrigatorio}
-        onChange={(e) => onChange(e.target.value)}
-        minLength={minCaracteres}
-        maxLength={maxCaracteres}
-        />
+            <input
+            readOnly={readOnly}
+            checked={checked}
+            type={tipo}
+            onFocus={onFocus}
+            placeholder={placeholder}
+            value={valor}
+            required={obrigatorio}
+            onChange={onChange}
+            minLength={minCaracteres}
+            maxLength={maxCaracteres}
+            />
     </Container>
   )
 }
