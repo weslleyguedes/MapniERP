@@ -10,6 +10,7 @@ padding:12px;
 margin:15px 0 5px 0;
 }
 `
+
 interface Props {
   label?:string;
   checked?:boolean;
@@ -22,7 +23,7 @@ interface Props {
   maxCaracteres?:number;
   readOnly?:boolean;
   onFocus?:() => void;
-  
+
 }
 
 const CampoTexto = ({label,readOnly,checked,tipo,placeholder,valor,obrigatorio,onChange,onFocus,minCaracteres,maxCaracteres} : Props) => {

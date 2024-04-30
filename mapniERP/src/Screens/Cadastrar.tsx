@@ -27,7 +27,7 @@ align-items:center;
 button {
   margin:0;
   padding:3px 6px;
-  margin-bottom:15px;
+  margin-bottom:14px;
   background-color:transparent;
   color:var(--preto-padrao);
 }
@@ -52,6 +52,7 @@ input:hover {
 }
 select:hover {
   border:1px solid var(--preto-hover-input);
+
 }
 select:focus {
   border:1px solid var(--preto-hover-input);
@@ -60,50 +61,49 @@ select:focus {
 const ContainerDadosCliente = styled.div`
 display:flex;
 flex-wrap:wrap;
-gap:10px;
-margin-bottom:25px;
+margin-bottom:20px;
 `
 const Linha1Cliente = styled.div`
 display:flex;
-gap:10px;
 width:100%;
+gap:20px;
+margin-bottom:12px;
 & > div:nth-child(1) input {
-  width:202px;
-
+  width:213px;
 }
 & > div:nth-child(2) input {
-  width:320px;
+  width:313px;
 }
 & > div:nth-child(4) select {
-  width:160px;
+  width:150px;
 }
 `
 const Linha2Cliente = styled.div`
 display:flex;
-gap:10px;
-width:100%;
+gap:20px;
+margin-bottom:12px;
 & > div:nth-child(1) select {
   width:160px;
 }
 & > div:nth-child(2) input {
-    width:300px;
+    width:253px;
 }
 & > div:nth-child(3) input {
-    width:260px;
+    width:263px;
 }
 `
 const Linha3Cliente = styled.div`
 display:flex;
-gap:10px;
+gap:20px;
 width:100%;
 & > div:nth-child(2) select {
-    width:80px;
+    width:81px;
 }
 & > div:nth-child(3) input {
-    width:340px;
+    width:298px;
 }
 & > div:nth-child(4) input {
-    width:320px;
+    width:298px;
 }
 `
 const ContainerStatusCliente = styled.div`
@@ -121,8 +121,8 @@ div {
 `
 const ContainerRepLegal = styled.div`
 display:flex;
-gap:10px;
-margin-bottom:25px;
+margin-bottom:20px;
+gap:20px;
 & > div:nth-child(1) input {
   width:350px;
 }
@@ -133,18 +133,18 @@ margin-bottom:25px;
 const ContainerContato = styled.div`
 display:flex;
 align-items:center;
-gap:10px;
-margin-bottom:25px;
+gap:20px;
+margin-bottom:20px;
 `
 const ContainerEnderecoCliente = styled.div`
 display:flex;
 flex-wrap:wrap;
-gap:10px;
-margin-bottom:25px;
+margin-bottom:20px;
 `
 const Linha1Endereco = styled.div`
 display:flex;
-gap:10px;
+gap:20px;
+margin-bottom:12px;
 width:100%;
 & > div:nth-child(1) input {
   width:152px;
@@ -155,37 +155,35 @@ width:100%;
 & > div:nth-child(4) input {
   width:200px;
 }
-
 `
 const Linha2Endereco = styled.div`
 display:flex;
-gap:10px;
+gap:20px;
 width:100%;
-& > div:nth-child(1) input {
-  width:400px;
+& > div:nth-child(1) {
+  width:350px;
 }
 & > div:nth-child(2) input {
-  width:400px;
+  width:350px;
 }
 
 `
 const ContainerMatriculas = styled.div`
 display:flex;
 flex-wrap:wrap;
-gap:10px;
 width:100%;
-margin-bottom:25px;
+margin-bottom:20px;
 `
 const Linha1Matriculas = styled.div`
 display:flex;
-gap:10px;
 width:100%;
-
+gap:20px;
+margin-bottom:12px;
 & > div:nth-child(1) input {
   width:100px;
 }
 & > div:nth-child(2) input {
-  width:350px;
+  width:310px;
 }
 & > div:nth-child(3) input {
   width:212px;
@@ -196,9 +194,8 @@ width:100%;
 `
 const Linha2Matriculas = styled.div`
 display:flex;
-gap:10px;
+gap:20px;
 width:100%;
-
 & > div:nth-child(1) select {
   width:200px;
 }
@@ -214,18 +211,16 @@ display:flex;
 gap:10px;
 margin-top:4px;
 button {
-  position:static;
-  background-color:var(--cinza-padrao);
+  background-color:transparent;
   padding:10px 12px !important;
   margin:0;
   border:1px solid var(--preto-padrao);
 }
 button:hover {
-  background-color:#00000099;
-  color:#ffffff;
+  background-color:var(--amarelo-padrao);
 }
-& > div:last-child button:hover {
-  background-color:#00000099;
+& div:last-child button:hover {
+  background-color:#c14646;
   color:#ffffff;
 }
 `
@@ -339,8 +334,8 @@ const Cadastrar = () => {
 
   const salvarCliente = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('deu certo')
     setModalAberta(false)
+    console.log('deu certo')
   }
 
   const toggleRepLegal = () => {
@@ -466,7 +461,7 @@ const Cadastrar = () => {
             <TituloCSS><PersonIcon /> Dados do Cliente</TituloCSS>
             <Botao onClick={() => setModalAberta(false)}><IoClose /></Botao>
           </BoxTituloEBotao>
-          <ContainerForm noValidate autoComplete="off" onSubmit={salvarCliente}>
+          <ContainerForm noValidate autoComplete="off" onSubmit={salvarCliente} action="#" method="GET">
             <ContainerDadosCliente>
               <Linha1Cliente>
                 <div>
@@ -871,10 +866,10 @@ const Cadastrar = () => {
 
             <ContainerBotoesSalvarVoltar>
               <div>
-                <Botao>Salvar</Botao>
+                <Botao onClick={() => salvarCliente}>Salvar</Botao>
               </div>
               <div>
-                <Botao onClick={() => {setModalAberta(false)}}>Voltar</Botao>
+                <Botao onClick={() => setModalAberta(!modalAberta)}>Voltar</Botao>
               </div>
             </ContainerBotoesSalvarVoltar>
           </ContainerForm>

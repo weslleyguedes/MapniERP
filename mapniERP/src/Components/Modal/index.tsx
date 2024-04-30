@@ -5,11 +5,11 @@ const Container = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 35px;
+  background-color: #F9FAFB;
+  padding: 40px;
   border-radius: 8px;
   z-index: 2;
-  width:900px;
+  width:800px;
   max-height:550px;
   overflow-y:auto;
 `
@@ -31,7 +31,7 @@ const Modal = ({children, alteraModal}:Props) => {
 
   return (
     <>
-    <Overlay onClick={alteraModal}/>
+      <Overlay onClick={alteraModal}/>
       <Container>
         {children}
       </Container>

@@ -140,6 +140,11 @@ select {
 }
 
 button,
+select:hover {
+  cursor:pointer;
+}
+
+button,
 [type="button"],
 [type="reset"],
 [type="submit"] {

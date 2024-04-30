@@ -11,6 +11,7 @@ import {Tooltip, TooltipText} from "../../Components/Tooltip";
 import Titulo from "../../Components/Titulo";
 import Cadastrar from "../../Screens/Cadastrar";
 import { TbReload } from "react-icons/tb";
+import Proposta from "../../Screens/Proposta";
 
 const Container = styled.div`
 margin: 20px 30px;
@@ -35,14 +36,16 @@ gap:5px;
 input {
   background-color:var(--cinza-padrao);
   width:300px;
-  padding:10px;
+  padding:8px;
   margin:0;
+
 }
 button {
  background-color:var(--cinza-padrao);
  display:flex;
  align-items:center;
  gap:5px;
+
 }
 `
 const ContainerBotoes = styled.div`
@@ -58,7 +61,7 @@ background-color:var(--cinza-padrao);
 display:flex;
 align-items:center;
 }
-button:first-child {
+button:nth-child(2) {
   gap:5px;
 }
 `
@@ -68,7 +71,6 @@ const Propostas = () => {
   const [modalFiltro,setModalFiltro] = useState(false) // STATE MODAL DO FILTRO
   const [modalCadastrar, setModalCadastrar] = useState(false) // STATE MODAL CADASTRAR
 
-
   const abreModalFiltro = () => {
     setModalFiltro(!modalFiltro)
   }
@@ -76,6 +78,7 @@ const Propostas = () => {
   const abreModalCadastrar = () => {
     setModalCadastrar(!modalCadastrar)
   }
+
 
   return (
     <Container>
@@ -109,6 +112,8 @@ const Propostas = () => {
         <Cadastrar/>
       </Modal>
       }
+
+
 
     </Container>
   )
