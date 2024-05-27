@@ -1,12 +1,12 @@
 import styled from "styled-components"
 
 const Container = styled.footer`
+height:32px;
 background-color:#1F1F1F;
-font-size:10px;
-position:absolute;
+font-size:0.8em;
+position:fixed;
 width:100%;
-left:0;
-right:0;
+bottom:0;
 color:#FFFFFF;
 display:flex;
 justify-content:space-between;

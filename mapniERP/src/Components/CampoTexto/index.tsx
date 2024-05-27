@@ -5,12 +5,16 @@ const Container = styled.div`
 input {
 width:100%;
 border-radius:4px;
-border:none;
 padding:12px;
 margin:15px 0 5px 0;
+border:1px solid var(--cinza-borda-input);
+&:hover {
+  border:1px solid var(--preto-padrao);
 }
+&:focus {
+  border:1px solid var(--preto-padrao);
+}}
 `
-
 interface Props {
   label?:string;
   checked?:boolean;
@@ -23,10 +27,10 @@ interface Props {
   maxCaracteres?:number;
   readOnly?:boolean;
   onFocus?:() => void;
-
+  onClick?:(event:React.MouseEvent<HTMLInputElement>) => void ;
 }
 
-const CampoTexto = ({label,readOnly,checked,tipo,placeholder,valor,obrigatorio,onChange,onFocus,minCaracteres,maxCaracteres} : Props) => {
+const CampoTexto = ({label,readOnly,checked,tipo,placeholder,valor,obrigatorio,onChange,onFocus,minCaracteres,maxCaracteres,onClick} : Props) => {
 
 
   return (
@@ -43,6 +47,7 @@ const CampoTexto = ({label,readOnly,checked,tipo,placeholder,valor,obrigatorio,o
             onChange={onChange}
             minLength={minCaracteres}
             maxLength={maxCaracteres}
+            onClick={onClick}
             />
     </Container>
   )

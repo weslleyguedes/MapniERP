@@ -1,14 +1,14 @@
 import styled from "styled-components"
 import CampoTexto from "../Components/CampoTexto"
 import { IoNewspaperOutline } from "react-icons/io5";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import Botao from "../Components/Botao";
 import { IoClose } from "react-icons/io5";
 import CampoSelect from "../Components/CampoSelect";
 import { LuFileBarChart } from "react-icons/lu";
 import { PiHandshakeLight } from "react-icons/pi";
 
-const ContainerForm = styled.div`
+const ContainerForm = styled.form`
   display:flex;
   flex-direction:column;
 input,select {
@@ -157,8 +157,12 @@ const OrigemIcon = styled(PiHandshakeLight)`
 color:var(--azul-icones);
 font-size:18px;
 `
+interface Props {
+  fechaModalProposta?:() => void;
+  modalClienteAberto?:() => void;
+}
 
-const Proposta = () => {
+const Proposta = ({fechaModalProposta,modalClienteAberto}:Props) => {
 
     // DADOS DA PROPOSTA
 
@@ -204,15 +208,25 @@ const Proposta = () => {
       }
     }
 
+    const voltarPraCliente = () => {
+      fechaModalProposta && fechaModalProposta()
+      modalClienteAberto && modalClienteAberto()
+    }
+
+    const salvarProposta = (event:FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        console.log('enviei a proposta')
+        fechaModalProposta && fechaModalProposta();
+    }
 
   return (
         <>
         <BoxTituloEBotao>
         <TituloCSS><PapelIcon />Proposta</TituloCSS>
-        <Botao><IoClose/></Botao>
+        <Botao onClick={() => fechaModalProposta && fechaModalProposta()}><IoClose/></Botao>
         </BoxTituloEBotao>
 
-      <ContainerForm>
+      <ContainerForm noValidate autoComplete="off" onSubmit={salvarProposta} action="#" method="GET">
 
         <ContainerProposta>
           <PropostaLinha1>
@@ -421,7 +435,6 @@ const Proposta = () => {
         </>
         )}
 
-
         <TituloCSS><OrigemIcon />Detalhes Venda</TituloCSS>
           <ContainerOrigem>
             <OrigemLinha1>
@@ -457,8 +470,8 @@ const Proposta = () => {
           </ContainerOrigem>
 
           <ContainerBotoes>
-            <Botao>Salvar</Botao>
-            <Botao>Cancelar</Botao>
+            <Botao onClick={() => salvarProposta}>Salvar</Botao>
+            <Botao onClick={voltarPraCliente}>Voltar</Botao>
           </ContainerBotoes>
 
 

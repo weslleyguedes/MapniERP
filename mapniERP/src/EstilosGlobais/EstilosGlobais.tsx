@@ -24,9 +24,11 @@ const EstilosGlobais= createGlobalStyle`
   --preto-padrao:#1F1F1F;
   --cinza-padrao:#00000019;
   --vermelho-erro:#e22a2a;
+  --vermelho-botao-cancelar:#ff4343;
   --cinza-borda-input:#83838380;
   --preto-hover-input:#000000b3;
   --azul-icones:#004b79;
+  --background-input-cinza:#a7a7a71c;
 }
 
 html {
@@ -112,6 +114,11 @@ img {
   border-style: none;
   margin:0;
   padding:0;
+}
+
+label {
+  padding:0;
+  margin:0;
 }
 
 button,

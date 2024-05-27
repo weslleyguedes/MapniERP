@@ -71,6 +71,7 @@ const Login = () => {
     } else {
       setSenhaErro ('')
     }
+    console.log('enviado')
   }
 
   const [usuario,setUsuario] = useState('')
@@ -87,7 +88,7 @@ const Login = () => {
                       tipo="text"
                       obrigatorio={true}
                       valor={usuario}
-                      onChange={setUsuario}
+                      onChange={(e) => setUsuario(e.target.value)}
                       placeholder="Usuário"
                       />
                      {usuarioErro && <MensagemDeErro><GoAlert style={{marginRight:"6px"}} color="#FBC105"/>{usuarioErro}</MensagemDeErro>}
@@ -95,7 +96,7 @@ const Login = () => {
                       tipo="password"
                       obrigatorio={true}
                       valor={senha}
-                      onChange={setSenha}
+                      onChange={(e) => setSenha (e.target.value)}
                       placeholder="Senha"
                       />
                      {senhaErro && <MensagemDeErro><GoAlert style={{marginRight:"6px"}} color="#FBC105"/>{senhaErro}</MensagemDeErro>}
