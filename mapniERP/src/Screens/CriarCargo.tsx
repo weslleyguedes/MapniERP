@@ -38,9 +38,10 @@ const MsgErro = styled.span`
 interface Props {
   funcaoFechaModalCargo: () => void;
   adicionarNovoCargo: (nome: string) => void;
+  
 }
 
-const Cargo = ({ funcaoFechaModalCargo, adicionarNovoCargo }: Props) => {
+const Cargo = ({ funcaoFechaModalCargo, adicionarNovoCargo}: Props) => {
   const [nomeCargo, setNomeCargo] = useState("");
   const [msgErro, setMsgErro] = useState(false);
 
@@ -53,6 +54,7 @@ const Cargo = ({ funcaoFechaModalCargo, adicionarNovoCargo }: Props) => {
     adicionarNovoCargo(nomeCargo);
     funcaoFechaModalCargo();
   };
+
 
   return (
     <Container>

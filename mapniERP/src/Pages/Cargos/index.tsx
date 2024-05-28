@@ -107,7 +107,6 @@ const Cargos = () => {
   const [AbreModalEditarCargos, setAbreModalEditarCargos] = useState<boolean>(false);
   const [cargos, setCargos] = useState<Dados[]>([]);
 
-
   const funcaoFechaModalCriarCargo = () => {
     setAbreModalCriarCargos(false);
   };
