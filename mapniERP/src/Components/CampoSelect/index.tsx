@@ -31,7 +31,7 @@ const CampoSelect = ({ children, valor, aoSelecionar,label}: Props) => {
   return (
     <Container>
       <label>{label}</label>
-      <select value={valor} onChange={aoSelecionar}>
+      <select value={valor} onChange={aoSelecionar} >
         {children}
       </select>
     </Container>

@@ -9,6 +9,25 @@ import { BsFolder } from "react-icons/bs";
 import { PiCurrencyCircleDollar } from "react-icons/pi";
 import { GoGear } from "react-icons/go";
 import { useState } from "react";
+import { AiOutlineLineChart } from "react-icons/ai";
+import { LuFileBarChart } from "react-icons/lu";
+import { IoPieChartOutline } from "react-icons/io5";
+import { HiOutlineBuildingLibrary } from "react-icons/hi2";
+import { AiOutlineGlobal } from "react-icons/ai";
+import { PiTargetDuotone } from "react-icons/pi";
+import { FaRegHandshake } from "react-icons/fa";
+import { FaRegLightbulb } from "react-icons/fa";
+import { TbReportAnalytics } from "react-icons/tb";
+import { HiOutlineOfficeBuilding } from "react-icons/hi";
+import { PiOfficeChair } from "react-icons/pi";
+import { GoPeople } from "react-icons/go";
+import { BsPersonVcard } from "react-icons/bs";
+import { HiOutlineClipboardDocumentList } from "react-icons/hi2";
+import { MdOutlinePayments } from "react-icons/md";
+import { FaHandHoldingDollar } from "react-icons/fa6";
+import { BsBank } from "react-icons/bs";
+import { BsCurrencyDollar } from "react-icons/bs";
+import { FaSackDollar } from "react-icons/fa6";
 
 const Container = styled.div`
   height: 70px;
@@ -26,14 +45,12 @@ const Container = styled.div`
 const ListaDeOpcoes = styled.ul`
   display: flex;
   height: 100%;
-  font-size: 15px;
-  margin: 0 40px;
-
+  font-size: 14px;
   li {
     display: flex;
     align-items: center;
-    padding: 0 12px;
-    gap: 6px;
+    padding: 0 22px;
+    gap: 8px;
     height: 100%;
     position: relative;
     &:hover {
@@ -41,7 +58,7 @@ const ListaDeOpcoes = styled.ul`
       .icone {
         color: #fbff00;
       }
-      &:after {
+      &::before {
         content: "";
         position: absolute;
         left: 0;
@@ -54,6 +71,24 @@ const ListaDeOpcoes = styled.ul`
     }
   }
 `;
+const IconeDash = styled(HiOutlineChartBarSquare)`
+  font-size: 20px;
+`;
+const IconeFoguete = styled(IoRocketOutline)`
+  font-size: 17px;
+`;
+const IconeRosca = styled(RiDonutChartFill)`
+  font-size: 17px;
+`;
+const IconeEngrenagem = styled(GoGear)`
+  font-size: 17px;
+`;
+const IconePasta = styled(BsFolder)`
+  font-size: 17px;
+`;
+const IconeDolar = styled(PiCurrencyCircleDollar)`
+  font-size: 19px;
+`;
 const IconeSair = styled(IoExitOutline)`
   cursor: pointer;
   font-size: 22px;
@@ -63,6 +98,9 @@ const IconeSair = styled(IoExitOutline)`
     transform: scale(1.09);
   }
 `;
+const LinkCSS = styled(Link)`
+  color: white;
+`;
 interface Props {
   show: boolean;
 }
@@ -70,60 +108,168 @@ interface Props {
 const SubMenu = styled.ul<Props>`
   display: ${(props) => (props.show ? "block" : "none")};
   position: absolute;
+  width: 130%;
   top: 100%;
-  left: 0;
-  right: 0;
+  left: -14%;
   background-color: var(--preto-padrao);
-  padding: 10px;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-  z-index: 1;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  li {
-    padding: 8px 10px;
+  z-index: 2;
+  p {
     display: flex;
     justify-content: center;
+    gap: 8px;
+    padding: 12px 0;
+    margin: 0;
     &:hover {
-      cursor: pointer;
+      background-color: #00000049;
+      border-radius: 5px;
+      color: white;
+      .subicone {
+        color: #fbff00;
+      }
     }
   }
 `;
+
 const Cabecalho = () => {
-  const [showSubMenu, setShowSubMenu] = useState(false);
+  const [showAnalytics, setShowAnalytics] = useState(false);
+  const [showOperacao, setShowOperacao] = useState(false);
+  const [showAdm, setShowAdm] = useState(false);
+  const [showFinanceiro, setShowFinanceiro] = useState(false);
 
   return (
     <Container>
       <img src={LogoMapni} alt="logo mapni" />
 
       <ListaDeOpcoes>
-        <li onClick={() => setShowSubMenu(!showSubMenu)}>
-          <HiOutlineChartBarSquare className="icone" fontSize={20} />
-          Dashboard
-          <SubMenu show={showSubMenu}>
-            <li>Exemplo1</li>
-            <li>Exemplo2</li>
-            <li>Exemplo3</li>
+        <LinkCSS to="/dashboard">
+          <li>
+            <IconeDash className="icone" />
+            Dashboard
+          </li>
+        </LinkCSS>
+        <LinkCSS to="/propostas">
+          <li>
+            <IconeFoguete className="icone" />
+            Propostas
+          </li>
+        </LinkCSS>
+        <li
+          onMouseEnter={() => setShowAnalytics(true)}
+          onMouseLeave={() => setShowAnalytics(false)}
+        >
+          <IconeRosca className="icone" />
+          Analytics
+          <SubMenu show={showAnalytics}>
+            <p>
+              <LuFileBarChart className="subicone" />
+              Metas
+            </p>
+            <p>
+              <AiOutlineLineChart className="subicone" />
+              Produção
+            </p>
+            <p>
+              <IoPieChartOutline className="subicone" />
+              Desempenho
+            </p>
           </SubMenu>
         </li>
-        <li>
-          <IoRocketOutline className="icone" fontSize={17} />
-          Propostas
-        </li>
-        <li>
-          <RiDonutChartFill className="icone" fontSize={17} />
-          Analytics{" "}
-        </li>
-        <li>
-          <GoGear className="icone" fontSize={17} />
+        <li
+          onMouseEnter={() => setShowOperacao(true)}
+          onMouseLeave={() => setShowOperacao(false)}
+        >
+          <IconeEngrenagem className="icone" />
           Operação
+          <SubMenu show={showOperacao}>
+            <p>
+              <HiOutlineBuildingLibrary className="subicone" fontSize={15} />
+              Bancos
+            </p>
+            <p>
+              <AiOutlineGlobal className="subicone" />
+              Produtos
+            </p>
+            <p>
+              <PiTargetDuotone className="subicone" />
+              Operações
+            </p>
+            <p>
+              <FaRegHandshake className="subicone" />
+              Promotoras
+            </p>
+            <p>
+              <TbReportAnalytics className="subicone" />
+              Config. de Metas
+            </p>
+            <p>
+              <FaRegLightbulb className="subicone" />
+              Origem de Vendas
+            </p>
+          </SubMenu>
         </li>
-        <li>
-          <BsFolder className="icone" fontSize={17} />
+        <li
+          onMouseEnter={() => setShowAdm(true)}
+          onMouseLeave={() => setShowAdm(false)}
+        >
+          <IconePasta className="icone" />
           Administrativo
+          <SubMenu show={showAdm}>
+            <p>
+              <BsPersonVcard className="subicone" />
+              RH
+            </p>
+            <LinkCSS to="/cargos">
+              <p onClick={() => setShowAdm(false)}>
+                <PiOfficeChair className="subicone" />
+                Cargos
+              </p>
+            </LinkCSS>
+            <p>
+              <GoPeople className="subicone" />
+              Equipes
+            </p>
+            <LinkCSS to="/departamentos">
+              <p onClick={() => setShowAdm(false)}>
+                <HiOutlineOfficeBuilding className="subicone" />
+                Departamentos
+              </p>
+            </LinkCSS>
+          </SubMenu>
         </li>
-        <li>
-          <PiCurrencyCircleDollar className="icone" fontSize={19} />
-          Financeiro{" "}
+        <li
+          onMouseEnter={() => setShowFinanceiro(true)}
+          onMouseLeave={() => setShowFinanceiro(false)}
+        >
+          <IconeDolar className="icone" />
+          Financeiro
+          <SubMenu show={showFinanceiro}>
+            <p>
+              <HiOutlineClipboardDocumentList className="subicone" />
+              Relatórios
+            </p>
+            <p>
+              <MdOutlinePayments className="subicone" />
+              Contas a Pagar
+            </p>
+            <p>
+              <FaHandHoldingDollar className="subicone" />
+              Contas a Receber
+            </p>
+            <p>
+              <BsBank className="subicone" />
+              Contas Bancárias
+            </p>
+            <p>
+              <BsCurrencyDollar className="subicone" />
+              Comissões Pagas
+            </p>
+            <p>
+              <FaSackDollar className="subicone" />
+              Comissionamento
+            </p>
+          </SubMenu>
         </li>
       </ListaDeOpcoes>
 

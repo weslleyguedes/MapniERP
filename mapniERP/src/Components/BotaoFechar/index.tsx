@@ -7,7 +7,7 @@ const Container = styled.div`
     padding: 3px 6px;
     border-radius: 5px;
     background-color: transparent;
-    
+    transition:ease-out .2s;
   }
   button:hover {
     background-color: #ea4b4b;

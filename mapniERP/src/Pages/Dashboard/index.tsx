@@ -1,17 +1,15 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
-const Container = styled.div`
-
-`
+const Container = styled.div``;
 
 const Dashboard = () => {
   return (
     <>
-    <Container>
-    
-    </Container>
+      <Container>
+        <h1>DASHBOARD</h1>
+      </Container>
     </>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

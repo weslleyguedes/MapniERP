@@ -5,6 +5,7 @@ import Propostas from "./Pages/Propostas"
 import Login from "./Pages/Login"
 import Departamentos from "./Pages/Departamentos"
 import Cargos from "./Pages/Cargos"
+import Rh from "./Pages/RH"
 
 const AppRoutes = () => {
   return (
@@ -16,6 +17,7 @@ const AppRoutes = () => {
         <Route path="/propostas" element={<Propostas/>}></Route>
         <Route path="/departamentos" element={<Departamentos/>}></Route>
         <Route path="/cargos" element={<Cargos/>}></Route>
+        <Route path="/Rh" element={<Rh/>}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

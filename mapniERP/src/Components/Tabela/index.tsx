@@ -8,33 +8,31 @@ import TableBody from "@mui/material/TableBody";
 import { styled } from "@mui/system";
 import { useEffect, useState } from "react";
 
-const CelulaCSS = styled(TableCell)(
-  ({ linhaWidth }: { linhaWidth?: string }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      textAlign: "center",
-      color: "white",
-      backgroundColor: "var(--preto-padrao)",
-      fontSize: "1em",
-      fontWeight: "bold",
-    },
-    [`&.${tableCellClasses.body}`]: {
-      textAlign: "center",
-      fontSize: "1em",
-      maxWidth: linhaWidth || "50px",
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-      whiteSpace: "nowrap",
-    },
-  })
-);
+const CelulaCSS = styled(TableCell)(() => ({
+  [`&.${tableCellClasses.head}`]: {
+    textAlign: "center",
+    color: "white",
+    backgroundColor: "var(--preto-padrao)",
+    fontSize: "1em",
+    fontWeight: "bold",
+
+  },
+  [`&.${tableCellClasses.body}`]: {
+    textAlign: "center",
+    fontSize: "1em",
+    padding:'10px 25px',
+    minWidth:'100px'
+  },
+}));
 
 interface Props {
   headers: (string | JSX.Element)[];
   rows: (string | JSX.Element)[][];
-  linhaWidth?: string;
+  margin?: string;
+  width?: string;
 }
 
-const Tabela = ({ headers, rows, linhaWidth }: Props) => {
+const Tabela = ({ headers, rows, margin, width }: Props) => {
   const [noData, setNoData] = useState("");
 
   useEffect(() => {
@@ -47,10 +45,7 @@ const Tabela = ({ headers, rows, linhaWidth }: Props) => {
   }, [rows]);
 
   return (
-    <TableContainer
-      component={Paper}
-      sx={{ margin: "20px 0", minWidth: "282px" }}
-    >
+    <TableContainer style={{ margin, width }} component={Paper}>
       <Table aria-label="tabela-customizada">
         <TableHead>
           <TableRow>
@@ -64,9 +59,7 @@ const Tabela = ({ headers, rows, linhaWidth }: Props) => {
             rows.map((row, rowIndex) => (
               <TableRow key={rowIndex}>
                 {row.map((cell, cellIndex) => (
-                  <CelulaCSS key={cellIndex} linhaWidth={linhaWidth}>
-                    {cell}
-                  </CelulaCSS>
+                  <CelulaCSS key={cellIndex}>{cell}</CelulaCSS>
                 ))}
               </TableRow>
             ))
