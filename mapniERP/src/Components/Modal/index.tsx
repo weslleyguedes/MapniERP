@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import styled, { keyframes } from 'styled-components';
+import React, { useState } from "react";
+import styled, { keyframes } from "styled-components";
 
 interface Props {
   children?: React.ReactNode;
@@ -38,19 +38,19 @@ const slideOut = keyframes`
 
 const Container = styled.div<Props & { isClosing: boolean }>`
   position: fixed;
-  top: ${(props) => props.top || '50%'};
-  left: ${(props) => props.left || '50%'};
+  top: ${(props) => props.top || "50%"};
+  left: ${(props) => props.left || "50%"};
   transform: translate(-50%, -50%);
-  background-color: #F9FAFB;
-  padding: ${(props) => props.padding || '40px'};
-  border: 1px solid ${(props) => props.borda || 'none'};
+  background-color: #f9fafb;
+  padding: ${(props) => props.padding || "40px"};
+  border: 1px solid ${(props) => props.borda || "none"};
   border-radius: 8px;
   z-index: 2;
-  width: ${(props) => props.width || '800px'};
-  height: ${(props) => props.height || ''};
-  max-height: 550px;
+  width: ${(props) => props.width || "800px"};
+  height: ${(props) => props.height || ""};
+  max-height: 75%;
   overflow-y: auto;
-  text-align: ${(props) => props.textalign || 'left'};
+  text-align: ${(props) => props.textalign || "left"};
   animation: ${(props) => (props.isClosing ? slideOut : slideIn)} 0.3s forwards;
 `;
 
@@ -61,7 +61,7 @@ const Overlay = styled.div<Props>`
   width: 100vw;
   height: 100vh;
   z-index: 1;
-  background-color: ${(props) => props.overlaycolor || '#00000043'};
+  background-color: ${(props) => props.overlaycolor || "#00000043"};
 `;
 
 const Modal = ({
@@ -74,7 +74,7 @@ const Modal = ({
   left,
   padding,
   textalign,
-  height
+  height,
 }: Props) => {
   const [isVisible, setIsVisible] = useState(true);
   const [isClosing, setIsClosing] = useState(false);
@@ -109,4 +109,3 @@ const Modal = ({
 };
 
 export default Modal;
-

@@ -29,7 +29,7 @@ import { BsBank } from "react-icons/bs";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { FaSackDollar } from "react-icons/fa6";
 
-const Container = styled.div`
+const Container = styled.nav`
   height: 70px;
   padding: 0 30px;
   background-color: var(--preto-padrao);
@@ -58,7 +58,7 @@ const ListaDeOpcoes = styled.ul`
       .icone {
         color: #fbff00;
       }
-      &::before {
+      &::after {
         content: "";
         position: absolute;
         left: 0;

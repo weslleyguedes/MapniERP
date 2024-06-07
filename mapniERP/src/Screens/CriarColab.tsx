@@ -63,7 +63,17 @@ const BoxCabecalho = styled.div`
         background-color: var(--azul-icones);
         position: absolute;
         z-index: 1;
+        transition: width 0.2s ease-in-out;
       }
+    }
+    &::after {
+      content: "";
+      width: 0;
+      height: 0.5px;
+      bottom: 0;
+      background-color: var(--azul-icones);
+      position: absolute;
+      z-index: 1;
     }
   }
 `;
@@ -196,7 +206,6 @@ const LinhaChavePix = styled.div`
   }
 `;
 const ContainerDadosProf = styled.div`
-  border: 1px solid red;
   input,
   select {
     margin-top: 8px;
@@ -212,7 +221,9 @@ const Linha1Acesso = styled.div`
     width: 200px;
   }
 `;
-const BoxDadosProf = styled.div``;
+const BoxDadosProf = styled.div`
+  margin-bottom: 25px;
+`;
 const Linha1DadosProf = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -230,8 +241,44 @@ const Linha3DadosProf = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
 `;
-const BoxHorarioAcesso = styled.div``;
-
+const BoxHorarioAcesso = styled.div`
+  display: flex;
+`;
+const BoxDiasSemana = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-right: 8em;
+  & > div {
+    display: flex;
+    gap: 5px;
+    margin: 7px 0;
+  }
+  input {
+    margin: 0px;
+  }
+  h2 {
+    margin-bottom: 10px;
+  }
+`;
+const ContainerHoras = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  h2 {
+    text-align: center;
+  }
+  h3 {
+    font-size: 0.8rem;
+  }
+`;
+const BoxHorasSemana = styled.div`
+  display: flex;
+  gap: 20px;
+`;
+const BoxHorasFimSemana = styled.div`
+  display: flex;
+  gap: 20px;
+`;
 // const BoxBotoes = styled.div`
 //   margin-top: 25px;
 //   display: flex;
@@ -554,20 +601,20 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
             <TituloCSS>Acesso</TituloCSS>
             <Linha1Acesso>
               <div>
-                <label>Login</label>
-                <CampoTexto tipo="text" />
+                <label htmlFor="login">Login</label>
+                <CampoTexto tipo="text" id="login" />
               </div>
               <div>
-                <label>Senha</label>
-                <CampoTexto tipo="password" />
+                <label htmlFor="senha">Senha</label>
+                <CampoTexto tipo="password" id="senha" />
               </div>
               <div>
-                <label>Repita a Senha</label>
-                <CampoTexto tipo="password" />
+                <label htmlFor="repitasenha">Repita a Senha</label>
+                <CampoTexto tipo="password" id="repitasenha" />
               </div>
               <div>
-                <label>Nome Utilizado</label>
-                <CampoTexto tipo="text" />
+                <label htmlFor="nomeutilizado">Nome Utilizado</label>
+                <CampoTexto tipo="text" id="nomeutilizado" />
               </div>
             </Linha1Acesso>
           </BoxDadosAcesso>
@@ -593,34 +640,92 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
             </Linha1DadosProf>
             <Linha2DadosProf>
               <div>
-                <label>Salário</label>
-                <CampoTexto tipo="text" />
+                <label htmlFor="salario">Salário</label>
+                <CampoTexto tipo="text" id="salario" />
               </div>
               <div>
-                <label>E-mail</label>
-                <CampoTexto tipo="text" />
+                <label htmlFor="email">E-mail</label>
+                <CampoTexto tipo="text" id="email" />
               </div>
               <div>
-                <label>Data Admissão</label>
-                <CampoTexto tipo="text" />
+                <label htmlFor="dataadmissao">Data Admissão</label>
+                <CampoTexto tipo="text" id="dataadmissao" />
               </div>
             </Linha2DadosProf>
             <Linha3DadosProf>
               <div>
-                <label>Data Demissão</label>
-                <CampoTexto tipo="text" />
+                <label htmlFor="datademissao">Data Demissão</label>
+                <CampoTexto tipo="text" id="datademissao" />
               </div>
               <div>
-                <label>Numero PIS/PASEP</label>
-                <CampoTexto tipo="text" />
+                <label htmlFor="numeropispasep">Numero PIS/PASEP</label>
+                <CampoTexto tipo="text" id="numeropispasep" />
               </div>
               <div>
-                <label>Nº Série CTPS</label>
-                <CampoTexto tipo="text" />
+                <label htmlFor="nseriectps">Nº Série CTPS</label>
+                <CampoTexto tipo="text" id="nseriectps" />
               </div>
             </Linha3DadosProf>
           </BoxDadosProf>
-          <BoxHorarioAcesso></BoxHorarioAcesso>
+          <TituloCSS>Configuração de Acesso</TituloCSS>
+          <BoxHorarioAcesso>
+            <BoxDiasSemana>
+              <h2>Dias da Semana</h2>
+              <div>
+                <CampoTexto tipo="checkbox" id="segunda" />
+                <label htmlFor="segunda">Segunda-Feira</label>
+              </div>
+              <div>
+                <CampoTexto tipo="checkbox" id="terca" />
+                <label htmlFor="terca">Terça-Feira</label>
+              </div>
+              <div>
+                <CampoTexto tipo="checkbox" id="quarta" />
+                <label htmlFor="quarta">Quarta-Feira</label>
+              </div>
+              <div>
+                <CampoTexto tipo="checkbox" id="quinta" />
+                <label htmlFor="quinta">Quinta-Feira</label>
+              </div>
+              <div>
+                <CampoTexto tipo="checkbox" id="sexta" />
+                <label htmlFor="sexta">Sexta-Feira</label>
+              </div>
+              <div>
+                <CampoTexto tipo="checkbox" id="sabado" />
+                <label htmlFor="sabado">Sábado</label>
+              </div>
+              <div>
+                <CampoTexto tipo="checkbox" id="domingo" />
+                <label htmlFor="domingo">Domingo</label>
+              </div>
+            </BoxDiasSemana>
+            <ContainerHoras>
+              <h2>Horas de Acesso</h2>
+              <h3>Segunda à Sexta</h3>
+              <BoxHorasSemana>
+                <div>
+                  <label htmlFor="inicio1">Inicio</label>
+                  <CampoTexto tipo="text" id="inicio1" />
+                </div>
+                <div>
+                  <label htmlFor="fim1">Fim</label>
+                  <CampoTexto tipo="text" id="fim1" />
+                </div>
+              </BoxHorasSemana>
+              <h3>Fim de Semana</h3>
+              <BoxHorasFimSemana>
+                <div>
+                  <label htmlFor="inicio2">Inicio</label>
+                  <CampoTexto tipo="text" id="inicio2" />
+                </div>
+                <div>
+                  <label htmlFor="fim2">Fim</label>
+                  <CampoTexto tipo="text" id="fim2" />
+                </div>
+              </BoxHorasFimSemana>
+            </ContainerHoras>
+          </BoxHorarioAcesso>
         </ContainerDadosProf>
       )}
     </Container>

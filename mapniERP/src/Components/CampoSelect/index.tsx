@@ -17,21 +17,21 @@ const Container = styled.div`
     }
   }
   label {
-  color:red;
-}
+    color: red;
+  }
 `;
 interface Props {
   children?: React.ReactNode;
   valor?: string;
   aoSelecionar?: (e: ChangeEvent<HTMLSelectElement>) => void;
-  label?:string;
+  label?: string;
 }
 
-const CampoSelect = ({ children, valor, aoSelecionar,label}: Props) => {
+const CampoSelect = ({ children, valor, aoSelecionar, label }: Props) => {
   return (
     <Container>
       <label>{label}</label>
-      <select value={valor} onChange={aoSelecionar} >
+      <select value={valor} onChange={aoSelecionar}>
         {children}
       </select>
     </Container>
