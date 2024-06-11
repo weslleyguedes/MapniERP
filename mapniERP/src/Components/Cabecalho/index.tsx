@@ -28,6 +28,8 @@ import { FaHandHoldingDollar } from "react-icons/fa6";
 import { BsBank } from "react-icons/bs";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { FaSackDollar } from "react-icons/fa6";
+import { IoPersonCircleOutline } from "react-icons/io5";
+
 
 const Container = styled.nav`
   height: 70px;
@@ -230,6 +232,12 @@ const Cabecalho = () => {
               <GoPeople className="subicone" />
               Equipes
             </p>
+            <LinkCSS to="/colaboradores">
+              <p onClick={() => setShowAdm(false)}>
+                <IoPersonCircleOutline fontSize={16} className="subicone" />
+                Colaboradores
+              </p>
+            </LinkCSS>
             <LinkCSS to="/departamentos">
               <p onClick={() => setShowAdm(false)}>
                 <HiOutlineOfficeBuilding className="subicone" />

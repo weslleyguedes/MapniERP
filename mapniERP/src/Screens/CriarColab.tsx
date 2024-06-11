@@ -12,6 +12,12 @@ import { FaSquarePhone } from "react-icons/fa6";
 import { TbCashBanknote } from "react-icons/tb";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import { GrUserWorker } from "react-icons/gr";
+import { GrSchedule } from "react-icons/gr";
+import { BsStopwatch } from "react-icons/bs";
+import { TbLock } from "react-icons/tb";
+import { HiOutlineInformationCircle } from "react-icons/hi";
+import { TbLogin2 } from "react-icons/tb";
+import Botao from "../Components/Botao";
 
 const Container = styled.div`
   display: flex;
@@ -99,7 +105,8 @@ const IconeDolar = styled(TbCashBanknote)`
   color: var(--azul-icones);
   font-size: 20px;
 `;
-const BoxForm = styled.form`
+const ContainerForm = styled.form``;
+const ContainerDados = styled.div`
   display: flex;
   flex-direction: column;
   select {
@@ -205,7 +212,7 @@ const LinhaChavePix = styled.div`
     width: 432px;
   }
 `;
-const ContainerDadosProf = styled.div`
+const ContainerDadosProf = styled.form`
   input,
   select {
     margin-top: 8px;
@@ -258,6 +265,8 @@ const BoxDiasSemana = styled.div`
   }
   h2 {
     margin-bottom: 10px;
+    display: flex;
+    gap: 5px;
   }
 `;
 const ContainerHoras = styled.div`
@@ -266,6 +275,9 @@ const ContainerHoras = styled.div`
   gap: 15px;
   h2 {
     text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
   }
   h3 {
     font-size: 0.8rem;
@@ -278,6 +290,36 @@ const BoxHorasSemana = styled.div`
 const BoxHorasFimSemana = styled.div`
   display: flex;
   gap: 20px;
+`;
+const IconeAgenda = styled(GrSchedule)`
+  color: var(--azul-icones);
+`;
+const IconeRelogio = styled(BsStopwatch)`
+  color: var(--azul-icones);
+`;
+const IconeCadeado = styled(TbLock)`
+  color: var(--azul-icones);
+  font-size: 15px;
+`;
+const IconeInform = styled(HiOutlineInformationCircle)`
+  color: var(--azul-icones);
+  font-size: 15px;
+`;
+const IconeLogin = styled(TbLogin2)`
+  color: var(--azul-icones);
+  font-size: 16px;
+`;
+const ContainerBotoes = styled.div`
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+  button {
+    background-color: var(--cinza-padrao);
+  }
+  & button:nth-child(2):hover {
+    background-color: var(--vermelho-botao-cancelar);
+    color: white;
+  }
 `;
 // const BoxBotoes = styled.div`
 //   margin-top: 25px;
@@ -339,395 +381,416 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
         </div>
       </ContainerCabecalho>
 
-      {showDadosPessoais && (
-        <BoxForm noValidate autoComplete="off">
-          <ContainerDadosColab>
-            <TituloCSS>
-              <IconeRG />
-              Dados Colaborador
-            </TituloCSS>
-            <Linha1Colab>
-              <div>
-                <label>Nome</label>
-                <CampoTexto tipo="text" />
-              </div>
-              <div>
-                <label>CPF</label>
-                <CampoTexto tipo="text" />
-              </div>
-              <div>
-                <label>RG</label>
-                <CampoTexto tipo="text" />
-              </div>
-              <div>
-                <label>Data Expedição</label>
-                <CampoTexto tipo="text" />
-              </div>
-            </Linha1Colab>
-            <Linha2Colab>
-              <div>
-                <label>Orgão Emissor</label>
-                <CampoTexto tipo="text" />
-              </div>
-              <div>
-                <label>Estado</label>
-                <CampoSelect>
-                  <option value="" disabled selected hidden>
-                    Selecione...
-                  </option>
-                  {arrays.UF.map((uf, index) => (
-                    <option value={uf} key={index}>
-                      {uf}
+      <ContainerForm>
+        {showDadosPessoais && (
+          <ContainerDados>
+            <ContainerDadosColab>
+              <TituloCSS>
+                <IconeRG />
+                Dados Colaborador
+              </TituloCSS>
+              <Linha1Colab>
+                <div>
+                  <label>Nome</label>
+                  <CampoTexto tipo="text" />
+                </div>
+                <div>
+                  <label>CPF</label>
+                  <CampoTexto tipo="text" />
+                </div>
+                <div>
+                  <label>RG</label>
+                  <CampoTexto tipo="text" />
+                </div>
+                <div>
+                  <label>Data Expedição</label>
+                  <CampoTexto tipo="text" />
+                </div>
+              </Linha1Colab>
+              <Linha2Colab>
+                <div>
+                  <label>Orgão Emissor</label>
+                  <CampoTexto tipo="text" />
+                </div>
+                <div>
+                  <label>Estado</label>
+                  <CampoSelect>
+                    <option value="" disabled selected hidden>
+                      Selecione...
                     </option>
-                  ))}
-                </CampoSelect>
-              </div>
-              <div>
-                <label>RG</label>
-                <CampoTexto tipo="text" />
-              </div>
-              <div>
-                <label>Sexo</label>
-                <CampoSelect>
-                  <option value="" disabled selected hidden>
-                    Selecione...
-                  </option>
-                  {arrays.Sexo.map((sexo, index) => (
-                    <option value={sexo} key={index}>
-                      {sexo}
+                    {arrays.UF.map((uf, index) => (
+                      <option value={uf} key={index}>
+                        {uf}
+                      </option>
+                    ))}
+                  </CampoSelect>
+                </div>
+                <div>
+                  <label>RG</label>
+                  <CampoTexto tipo="text" />
+                </div>
+                <div>
+                  <label>Sexo</label>
+                  <CampoSelect>
+                    <option value="" disabled selected hidden>
+                      Selecione...
                     </option>
-                  ))}
-                </CampoSelect>
-              </div>
-              <div>
-                <label>Estado Civil</label>
-                <CampoSelect>
-                  <option value="" disabled selected hidden>
-                    Selecione...
-                  </option>
-                  {arrays.EstadoCivil.map((civil, index) => (
-                    <option value={civil} key={index}>
-                      {civil}
+                    {arrays.Sexo.map((sexo, index) => (
+                      <option value={sexo} key={index}>
+                        {sexo}
+                      </option>
+                    ))}
+                  </CampoSelect>
+                </div>
+                <div>
+                  <label>Estado Civil</label>
+                  <CampoSelect>
+                    <option value="" disabled selected hidden>
+                      Selecione...
                     </option>
-                  ))}
-                </CampoSelect>
-              </div>
-            </Linha2Colab>
-            <Linha3Colab>
-              <div>
-                <label>Nome Cônjuge</label>
-                <CampoTexto tipo="text" />
-              </div>
-              <div>
-                <label>Nome Mãe</label>
-                <CampoTexto tipo="text" />
-              </div>
-              <div>
-                <label>Nome Pai</label>
-                <CampoTexto tipo="text" />
-              </div>
-            </Linha3Colab>
-          </ContainerDadosColab>
+                    {arrays.EstadoCivil.map((civil, index) => (
+                      <option value={civil} key={index}>
+                        {civil}
+                      </option>
+                    ))}
+                  </CampoSelect>
+                </div>
+              </Linha2Colab>
+              <Linha3Colab>
+                <div>
+                  <label>Nome Cônjuge</label>
+                  <CampoTexto tipo="text" />
+                </div>
+                <div>
+                  <label>Nome Mãe</label>
+                  <CampoTexto tipo="text" />
+                </div>
+                <div>
+                  <label>Nome Pai</label>
+                  <CampoTexto tipo="text" />
+                </div>
+              </Linha3Colab>
+            </ContainerDadosColab>
 
-          <ContainerEnderecoColab>
-            <TituloCSS>
-              <IconeCasa />
-              Endereço
-            </TituloCSS>
-            <Linha1Endereco>
-              <div>
-                <label>CEP</label>
-                <CampoTexto
-                  tipo="text"
-                  valor={colabCEP}
-                  onChange={(e) => setColabCEP(e.target.value)}
-                />
-              </div>
-              <div>
-                <label>Logradouro</label>
-                <CampoTexto
-                  valor={dados?.logradouro ? dados?.logradouro : colabRua}
-                  onChange={
-                    dados?.logradouro
-                      ? undefined
-                      : (e) => setColabRua(e.target.value)
-                  }
-                  tipo="text"
-                />
-              </div>
-              <div>
-                <label>Nº</label>
-                <CampoTexto tipo="text" />
-              </div>
-            </Linha1Endereco>
-            <Linha2Endereco>
-              <div>
-                <label>Complemento</label>
-                <CampoTexto tipo="text" />
-              </div>
-              <div>
-                <label>Bairro</label>
-                <CampoTexto
-                  tipo="text"
-                  valor={dados?.bairro ? dados?.bairro : colabBairro}
-                  onChange={
-                    dados?.bairro
-                      ? undefined
-                      : (e) => setColabBairro(e.target.value)
-                  }
-                />
-              </div>
-              <div>
-                <label>Cidade</label>
-                <CampoTexto
-                  tipo="text"
-                  valor={dados?.localidade ? dados?.localidade : colabCidade}
-                  onChange={
-                    dados?.localidade
-                      ? undefined
-                      : (e) => setColabCidade(e.target.value)
-                  }
-                />
-              </div>
-              <div>
-                <label>Estado</label>
-                <CampoTexto
-                  valor={dados?.uf ? dados?.uf : colabUF}
-                  onChange={
-                    dados?.uf ? undefined : (e) => setColabUF(e.target.value)
-                  }
-                  tipo="text"
-                />
-              </div>
-            </Linha2Endereco>
-          </ContainerEnderecoColab>
+            <ContainerEnderecoColab>
+              <TituloCSS>
+                <IconeCasa />
+                Endereço
+              </TituloCSS>
+              <Linha1Endereco>
+                <div>
+                  <label>CEP</label>
+                  <CampoTexto
+                    tipo="text"
+                    valor={colabCEP}
+                    onChange={(e) => setColabCEP(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <label>Logradouro</label>
+                  <CampoTexto
+                    valor={dados?.logradouro ? dados?.logradouro : colabRua}
+                    onChange={
+                      dados?.logradouro
+                        ? undefined
+                        : (e) => setColabRua(e.target.value)
+                    }
+                    tipo="text"
+                  />
+                </div>
+                <div>
+                  <label>Nº</label>
+                  <CampoTexto tipo="text" />
+                </div>
+              </Linha1Endereco>
+              <Linha2Endereco>
+                <div>
+                  <label>Complemento</label>
+                  <CampoTexto tipo="text" />
+                </div>
+                <div>
+                  <label>Bairro</label>
+                  <CampoTexto
+                    tipo="text"
+                    valor={dados?.bairro ? dados?.bairro : colabBairro}
+                    onChange={
+                      dados?.bairro
+                        ? undefined
+                        : (e) => setColabBairro(e.target.value)
+                    }
+                  />
+                </div>
+                <div>
+                  <label>Cidade</label>
+                  <CampoTexto
+                    tipo="text"
+                    valor={dados?.localidade ? dados?.localidade : colabCidade}
+                    onChange={
+                      dados?.localidade
+                        ? undefined
+                        : (e) => setColabCidade(e.target.value)
+                    }
+                  />
+                </div>
+                <div>
+                  <label>Estado</label>
+                  <CampoTexto
+                    valor={dados?.uf ? dados?.uf : colabUF}
+                    onChange={
+                      dados?.uf ? undefined : (e) => setColabUF(e.target.value)
+                    }
+                    tipo="text"
+                  />
+                </div>
+              </Linha2Endereco>
+            </ContainerEnderecoColab>
 
-          <ContainerContatosColab>
-            <TituloCSS>
-              <IconeTel />
-              Contatos
-            </TituloCSS>
-            <LinhaContatos>
-              <div>
-                <label>Telefone</label>
-                <CampoTexto tipo="text" />
-              </div>
-              <div>
-                <label>Tipo</label>
-                <CampoSelect>
-                  <option value="" disabled selected hidden>
-                    Selecione...
-                  </option>
-                  <option value="Whatsapp e Telefone">
-                    WhatsApp e Telefone
-                  </option>
-                  <option value="Telefone">Apenas Telefone</option>
-                  <option value="WhatsApp">Apenas WhatsApp</option>
-                </CampoSelect>
-              </div>
-              <div>
-                <label>Uso</label>
-                <CampoSelect>
-                  <option value="" disabled selected hidden>
-                    Selecione...
-                  </option>
-                  <option value="Ativo">Ativo</option>
-                  <option value="Pouco Ativo">Pouco Ativo</option>
-                  <option value="Apenas Recado">Apenas Recado</option>
-                </CampoSelect>
-              </div>
-            </LinhaContatos>
-          </ContainerContatosColab>
-          <ContainerDadosBancarios>
-            <TituloCSS>
-              <IconeDolar />
-              Dados Bancários
-            </TituloCSS>
-            <LinhaDadosBancarios>
-              <div>
-                <label>Tipo Conta</label>
-                <CampoSelect>
-                  <option value="" disabled selected hidden>
-                    Selecione...
-                  </option>
-                  <option value="Chave PIX">Chave PIX</option>
-                  <option value="Conta Salário">Conta Salário</option>
-                  <option value="Conta Corrente">Conta Corrente</option>
-                  <option value="Conta Poupanca">Conta Poupança</option>
-                </CampoSelect>
-              </div>
-              <div>
-                <label>Banco</label>
-                <CampoSelect>
-                  <option value="" disabled selected hidden>
-                    Selecione...
-                  </option>
-                </CampoSelect>
-              </div>
-              <div>
-                <label>Agência</label>
-                <CampoTexto tipo="text" />
-              </div>
-              <div>
-                <label>Conta</label>
-                <CampoTexto tipo="text" />
-              </div>
-            </LinhaDadosBancarios>
-            <LinhaChavePix>
-              <div>
-                <label>Tipo Chave</label>
-                <CampoSelect>
-                  <option value="" disabled selected hidden>
-                    Selecione...
-                  </option>
-                  <option value="CPF/CNPJ">CPF/CNPJ</option>
-                  <option value="E-mail">E-mail</option>
-                  <option value="Celular">Celular</option>
-                  <option value="Chave Aleatória">Chave Aleatória</option>
-                </CampoSelect>
-              </div>
-              <div>
-                <label>Chave</label>
-                <CampoTexto tipo="text" />
-              </div>
-            </LinhaChavePix>
-          </ContainerDadosBancarios>
-        </BoxForm>
-      )}
+            <ContainerContatosColab>
+              <TituloCSS>
+                <IconeTel />
+                Contatos
+              </TituloCSS>
+              <LinhaContatos>
+                <div>
+                  <label>Telefone</label>
+                  <CampoTexto tipo="text" />
+                </div>
+                <div>
+                  <label>Tipo</label>
+                  <CampoSelect>
+                    <option value="" disabled selected hidden>
+                      Selecione...
+                    </option>
+                    <option value="Whatsapp e Telefone">
+                      WhatsApp e Telefone
+                    </option>
+                    <option value="Telefone">Apenas Telefone</option>
+                    <option value="WhatsApp">Apenas WhatsApp</option>
+                  </CampoSelect>
+                </div>
+                <div>
+                  <label>Uso</label>
+                  <CampoSelect>
+                    <option value="" disabled selected hidden>
+                      Selecione...
+                    </option>
+                    <option value="Ativo">Ativo</option>
+                    <option value="Pouco Ativo">Pouco Ativo</option>
+                    <option value="Apenas Recado">Apenas Recado</option>
+                  </CampoSelect>
+                </div>
+              </LinhaContatos>
+            </ContainerContatosColab>
+            <ContainerDadosBancarios>
+              <TituloCSS>
+                <IconeDolar />
+                Dados Bancários
+              </TituloCSS>
+              <LinhaDadosBancarios>
+                <div>
+                  <label>Tipo Conta</label>
+                  <CampoSelect>
+                    <option value="" disabled selected hidden>
+                      Selecione...
+                    </option>
+                    <option value="Chave PIX">Chave PIX</option>
+                    <option value="Conta Salário">Conta Salário</option>
+                    <option value="Conta Corrente">Conta Corrente</option>
+                    <option value="Conta Poupanca">Conta Poupança</option>
+                  </CampoSelect>
+                </div>
+                <div>
+                  <label>Banco</label>
+                  <CampoSelect>
+                    <option value="" disabled selected hidden>
+                      Selecione...
+                    </option>
+                  </CampoSelect>
+                </div>
+                <div>
+                  <label>Agência</label>
+                  <CampoTexto tipo="text" />
+                </div>
+                <div>
+                  <label>Conta</label>
+                  <CampoTexto tipo="text" />
+                </div>
+              </LinhaDadosBancarios>
+              <LinhaChavePix>
+                <div>
+                  <label>Tipo Chave</label>
+                  <CampoSelect>
+                    <option value="" disabled selected hidden>
+                      Selecione...
+                    </option>
+                    <option value="CPF/CNPJ">CPF/CNPJ</option>
+                    <option value="E-mail">E-mail</option>
+                    <option value="Celular">Celular</option>
+                    <option value="Chave Aleatória">Chave Aleatória</option>
+                  </CampoSelect>
+                </div>
+                <div>
+                  <label>Chave</label>
+                  <CampoTexto tipo="text" />
+                </div>
+              </LinhaChavePix>
+            </ContainerDadosBancarios>
+          </ContainerDados>
+        )}
 
-      {showDadosProfissionais && (
-        <ContainerDadosProf>
-          <BoxDadosAcesso>
-            <TituloCSS>Acesso</TituloCSS>
-            <Linha1Acesso>
-              <div>
-                <label htmlFor="login">Login</label>
-                <CampoTexto tipo="text" id="login" />
-              </div>
-              <div>
-                <label htmlFor="senha">Senha</label>
-                <CampoTexto tipo="password" id="senha" />
-              </div>
-              <div>
-                <label htmlFor="repitasenha">Repita a Senha</label>
-                <CampoTexto tipo="password" id="repitasenha" />
-              </div>
-              <div>
-                <label htmlFor="nomeutilizado">Nome Utilizado</label>
-                <CampoTexto tipo="text" id="nomeutilizado" />
-              </div>
-            </Linha1Acesso>
-          </BoxDadosAcesso>
-          <BoxDadosProf>
-            <TituloCSS>Informações Profissionais</TituloCSS>
-            <Linha1DadosProf>
-              <div>
-                <label>Cargo</label>
-                <CampoSelect>
-                  <option value="" disabled selected hidden>
-                    Selecione...
-                  </option>
-                </CampoSelect>
-              </div>
-              <div>
-                <label>Departamento</label>
-                <CampoSelect>
-                  <option value="" disabled selected hidden>
-                    Selecione...
-                  </option>
-                </CampoSelect>
-              </div>
-            </Linha1DadosProf>
-            <Linha2DadosProf>
-              <div>
-                <label htmlFor="salario">Salário</label>
-                <CampoTexto tipo="text" id="salario" />
-              </div>
-              <div>
-                <label htmlFor="email">E-mail</label>
-                <CampoTexto tipo="text" id="email" />
-              </div>
-              <div>
-                <label htmlFor="dataadmissao">Data Admissão</label>
-                <CampoTexto tipo="text" id="dataadmissao" />
-              </div>
-            </Linha2DadosProf>
-            <Linha3DadosProf>
-              <div>
-                <label htmlFor="datademissao">Data Demissão</label>
-                <CampoTexto tipo="text" id="datademissao" />
-              </div>
-              <div>
-                <label htmlFor="numeropispasep">Numero PIS/PASEP</label>
-                <CampoTexto tipo="text" id="numeropispasep" />
-              </div>
-              <div>
-                <label htmlFor="nseriectps">Nº Série CTPS</label>
-                <CampoTexto tipo="text" id="nseriectps" />
-              </div>
-            </Linha3DadosProf>
-          </BoxDadosProf>
-          <TituloCSS>Configuração de Acesso</TituloCSS>
-          <BoxHorarioAcesso>
-            <BoxDiasSemana>
-              <h2>Dias da Semana</h2>
-              <div>
-                <CampoTexto tipo="checkbox" id="segunda" />
-                <label htmlFor="segunda">Segunda-Feira</label>
-              </div>
-              <div>
-                <CampoTexto tipo="checkbox" id="terca" />
-                <label htmlFor="terca">Terça-Feira</label>
-              </div>
-              <div>
-                <CampoTexto tipo="checkbox" id="quarta" />
-                <label htmlFor="quarta">Quarta-Feira</label>
-              </div>
-              <div>
-                <CampoTexto tipo="checkbox" id="quinta" />
-                <label htmlFor="quinta">Quinta-Feira</label>
-              </div>
-              <div>
-                <CampoTexto tipo="checkbox" id="sexta" />
-                <label htmlFor="sexta">Sexta-Feira</label>
-              </div>
-              <div>
-                <CampoTexto tipo="checkbox" id="sabado" />
-                <label htmlFor="sabado">Sábado</label>
-              </div>
-              <div>
-                <CampoTexto tipo="checkbox" id="domingo" />
-                <label htmlFor="domingo">Domingo</label>
-              </div>
-            </BoxDiasSemana>
-            <ContainerHoras>
-              <h2>Horas de Acesso</h2>
-              <h3>Segunda à Sexta</h3>
-              <BoxHorasSemana>
+        {showDadosProfissionais && (
+          <ContainerDadosProf>
+            <BoxDadosAcesso>
+              <TituloCSS>
+                <IconeLogin />
+                Acesso
+              </TituloCSS>
+              <Linha1Acesso>
                 <div>
-                  <label htmlFor="inicio1">Inicio</label>
-                  <CampoTexto tipo="text" id="inicio1" />
+                  <label htmlFor="login">Login</label>
+                  <CampoTexto tipo="text" id="login" />
                 </div>
                 <div>
-                  <label htmlFor="fim1">Fim</label>
-                  <CampoTexto tipo="text" id="fim1" />
-                </div>
-              </BoxHorasSemana>
-              <h3>Fim de Semana</h3>
-              <BoxHorasFimSemana>
-                <div>
-                  <label htmlFor="inicio2">Inicio</label>
-                  <CampoTexto tipo="text" id="inicio2" />
+                  <label htmlFor="senha">Senha</label>
+                  <CampoTexto tipo="password" id="senha" />
                 </div>
                 <div>
-                  <label htmlFor="fim2">Fim</label>
-                  <CampoTexto tipo="text" id="fim2" />
+                  <label htmlFor="repitasenha">Repita a Senha</label>
+                  <CampoTexto tipo="password" id="repitasenha" />
                 </div>
-              </BoxHorasFimSemana>
-            </ContainerHoras>
-          </BoxHorarioAcesso>
-        </ContainerDadosProf>
-      )}
+                <div>
+                  <label htmlFor="nomeutilizado">Nome Utilizado</label>
+                  <CampoTexto tipo="text" id="nomeutilizado" />
+                </div>
+              </Linha1Acesso>
+            </BoxDadosAcesso>
+            <BoxDadosProf>
+              <TituloCSS>
+                <IconeInform />
+                Informações Profissionais
+              </TituloCSS>
+              <Linha1DadosProf>
+                <div>
+                  <label>Cargo</label>
+                  <CampoSelect>
+                    <option value="" disabled selected hidden>
+                      Selecione...
+                    </option>
+                  </CampoSelect>
+                </div>
+                <div>
+                  <label>Departamento</label>
+                  <CampoSelect>
+                    <option value="" disabled selected hidden>
+                      Selecione...
+                    </option>
+                  </CampoSelect>
+                </div>
+              </Linha1DadosProf>
+              <Linha2DadosProf>
+                <div>
+                  <label htmlFor="salario">Salário</label>
+                  <CampoTexto tipo="text" id="salario" />
+                </div>
+                <div>
+                  <label htmlFor="email">E-mail</label>
+                  <CampoTexto tipo="text" id="email" />
+                </div>
+                <div>
+                  <label htmlFor="dataadmissao">Data Admissão</label>
+                  <CampoTexto tipo="text" id="dataadmissao" />
+                </div>
+              </Linha2DadosProf>
+              <Linha3DadosProf>
+                <div>
+                  <label htmlFor="datademissao">Data Demissão</label>
+                  <CampoTexto tipo="text" id="datademissao" />
+                </div>
+                <div>
+                  <label htmlFor="numeropispasep">Numero PIS/PASEP</label>
+                  <CampoTexto tipo="text" id="numeropispasep" />
+                </div>
+                <div>
+                  <label htmlFor="nseriectps">Nº Série CTPS</label>
+                  <CampoTexto tipo="text" id="nseriectps" />
+                </div>
+              </Linha3DadosProf>
+            </BoxDadosProf>
+            <TituloCSS>
+              <IconeCadeado />
+              Configuração de Acesso
+            </TituloCSS>
+            <BoxHorarioAcesso>
+              <BoxDiasSemana>
+                <h2>
+                  <IconeAgenda />
+                  Dias da Semana
+                </h2>
+                <div>
+                  <CampoTexto tipo="checkbox" id="segunda" />
+                  <label htmlFor="segunda">Segunda-Feira</label>
+                </div>
+                <div>
+                  <CampoTexto tipo="checkbox" id="terca" />
+                  <label htmlFor="terca">Terça-Feira</label>
+                </div>
+                <div>
+                  <CampoTexto tipo="checkbox" id="quarta" />
+                  <label htmlFor="quarta">Quarta-Feira</label>
+                </div>
+                <div>
+                  <CampoTexto tipo="checkbox" id="quinta" />
+                  <label htmlFor="quinta">Quinta-Feira</label>
+                </div>
+                <div>
+                  <CampoTexto tipo="checkbox" id="sexta" />
+                  <label htmlFor="sexta">Sexta-Feira</label>
+                </div>
+                <div>
+                  <CampoTexto tipo="checkbox" id="sabado" />
+                  <label htmlFor="sabado">Sábado</label>
+                </div>
+                <div>
+                  <CampoTexto tipo="checkbox" id="domingo" />
+                  <label htmlFor="domingo">Domingo</label>
+                </div>
+              </BoxDiasSemana>
+              <ContainerHoras>
+                <h2>
+                  <IconeRelogio />
+                  Horas de Acesso
+                </h2>
+                <h3>Segunda à Sexta</h3>
+                <BoxHorasSemana>
+                  <div>
+                    <label htmlFor="inicio1">Inicio</label>
+                    <CampoTexto tipo="text" id="inicio1" />
+                  </div>
+                  <div>
+                    <label htmlFor="fim1">Fim</label>
+                    <CampoTexto tipo="text" id="fim1" />
+                  </div>
+                </BoxHorasSemana>
+                <h3>Fim de Semana</h3>
+                <BoxHorasFimSemana>
+                  <div>
+                    <label htmlFor="inicio2">Inicio</label>
+                    <CampoTexto tipo="text" id="inicio2" />
+                  </div>
+                  <div>
+                    <label htmlFor="fim2">Fim</label>
+                    <CampoTexto tipo="text" id="fim2" />
+                  </div>
+                </BoxHorasFimSemana>
+              </ContainerHoras>
+            </BoxHorarioAcesso>
+          </ContainerDadosProf>
+        )}
+        <ContainerBotoes>
+          <Botao>Salvar</Botao>
+          <Botao>Cancelar</Botao>
+        </ContainerBotoes>
+      </ContainerForm>
     </Container>
   );
 };

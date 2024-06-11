@@ -57,7 +57,7 @@ const IconeDolar = styled(PiCurrencyCircleDollar)`
   margin-bottom: 2px;
 `;
 const IconeSetaBaixo = styled(IoIosArrowDown)``;
-const IconeSetaDir = styled(IoIosArrowForward)``
+const IconeSetaDir = styled(IoIosArrowForward)``;
 const ContainerPermissoes = styled.div`
   margin-top: 20px;
   display: flex;
@@ -311,7 +311,8 @@ const ConfigCargo = ({ funcaoFechaModalConfigCargo }: Props) => {
   const [selecionaTodos, setSelecionaTodos] = useState<boolean>(false);
 
   const [dashValue, setDashValue] = useState<boolean>(false);
-  const [propostasCadastradas, setPropostasCadastradas] = useState<boolean>(false);
+  const [propostasCadastradas, setPropostasCadastradas] =
+    useState<boolean>(false);
   const [rankingVendas, setRankingVendas] = useState<boolean>(false);
   const [filtro, setFiltro] = useState<boolean>(false);
   const [graficoPizza, setGraficoPizza] = useState<boolean>(false);
@@ -346,17 +347,21 @@ const ConfigCargo = ({ funcaoFechaModalConfigCargo }: Props) => {
   const [financeiroValue, setFinanceiroValue] = useState<boolean>(false);
   const [repasseComissao, setRepasseComissao] = useState<boolean>(false);
   const [comissaoRepassada, setComissaoRepassada] = useState<boolean>(false);
-  const [contasAPagar, setContasAPagar] = useState<boolean>(false)
-  const [contasAReceber, setContasAReceber] = useState<boolean>(false)
-  const [relatorios, setRelatorios] = useState<boolean>(false)
-  const [contasBancarias, setContasBancarias] = useState<boolean>(false)
+  const [contasAPagar, setContasAPagar] = useState<boolean>(false);
+  const [contasAReceber, setContasAReceber] = useState<boolean>(false);
+  const [relatorios, setRelatorios] = useState<boolean>(false);
+  const [contasBancarias, setContasBancarias] = useState<boolean>(false);
 
   const [showContentDash, setShowContentDash] = useState<boolean>(false);
-  const [showContentPropostas, setShowContentPropostas] = useState<boolean>(false);
-  const [showContentAnalytics, setShowContentAnalytics] = useState<boolean>(false);
-  const [showContentOperacao, setShowContentOperacao] = useState<boolean>(false);
+  const [showContentPropostas, setShowContentPropostas] =
+    useState<boolean>(false);
+  const [showContentAnalytics, setShowContentAnalytics] =
+    useState<boolean>(false);
+  const [showContentOperacao, setShowContentOperacao] =
+    useState<boolean>(false);
   const [showContentAdm, setShowContentAdm] = useState<boolean>(false);
-  const [showContentFinanceiro, setShowContentFinanceiro] = useState<boolean>(false);
+  const [showContentFinanceiro, setShowContentFinanceiro] =
+    useState<boolean>(false);
 
   const onChangeSelectAll = (e: ChangeEvent<HTMLInputElement>) => {
     const isChecked = e.target.checked;
@@ -397,13 +402,12 @@ const ConfigCargo = ({ funcaoFechaModalConfigCargo }: Props) => {
     setRH(isChecked);
     //TITULO FINANCEIRO
     setFinanceiroValue(isChecked);
-    setRepasseComissao(isChecked)
-    setComissaoRepassada(isChecked)
-    setContasAPagar(isChecked)
-    setContasAReceber(isChecked)
-    setRelatorios(isChecked)
-    setContasBancarias(isChecked)
-
+    setRepasseComissao(isChecked);
+    setComissaoRepassada(isChecked);
+    setContasAPagar(isChecked);
+    setContasAReceber(isChecked);
+    setRelatorios(isChecked);
+    setContasBancarias(isChecked);
   };
   const onChangeDash = (e: ChangeEvent<HTMLInputElement>) => {
     const isChecked = e.target.checked;
@@ -451,12 +455,12 @@ const ConfigCargo = ({ funcaoFechaModalConfigCargo }: Props) => {
   const onChangeFinanceiro = (e: ChangeEvent<HTMLInputElement>) => {
     const isChecked = e.target.checked;
     setFinanceiroValue(isChecked);
-    setRepasseComissao(isChecked)
-    setComissaoRepassada(isChecked)
-    setContasAPagar(isChecked)
-    setContasAReceber(isChecked)
-    setRelatorios(isChecked)
-    setContasBancarias(isChecked)
+    setRepasseComissao(isChecked);
+    setComissaoRepassada(isChecked);
+    setContasAPagar(isChecked);
+    setContasAReceber(isChecked);
+    setRelatorios(isChecked);
+    setContasBancarias(isChecked);
   };
 
   return (
@@ -472,28 +476,29 @@ const ConfigCargo = ({ funcaoFechaModalConfigCargo }: Props) => {
             tipo="checkbox"
             checked={selecionaTodos}
             onChange={onChangeSelectAll}
+            id="selecionatodos"
           />
-          <span>Selecionar Todos</span>
+          <label htmlFor="selecionatodos">Selecionar Todos</label>
         </div>
       </BoxSelectAll>
 
-      <ContainerPermissoes >
+      <ContainerPermissoes>
         <BoxDashboard onClick={() => setShowContentDash(!showContentDash)}>
           <div>
             <CampoTexto
               tipo="checkbox"
               checked={dashValue}
               onChange={onChangeDash}
-              onClick={(event:React.MouseEvent<HTMLInputElement>) => event.stopPropagation()}
+              onClick={(event: React.MouseEvent<HTMLInputElement>) =>
+                event.stopPropagation()
+              }
             />
             <span>
               <IconeDash />
               Dashboard
             </span>
           </div>
-          <div>
-            {showContentDash ? <IconeSetaBaixo /> : <IconeSetaDir /> }
-          </div>
+          <div>{showContentDash ? <IconeSetaBaixo /> : <IconeSetaDir />}</div>
         </BoxDashboard>
 
         {showContentDash && (
@@ -541,7 +546,9 @@ const ConfigCargo = ({ funcaoFechaModalConfigCargo }: Props) => {
               tipo="checkbox"
               checked={propostasValue}
               onChange={onChangePropostas}
-              onClick={(event:React.MouseEvent<HTMLInputElement>) => event.stopPropagation()}
+              onClick={(event: React.MouseEvent<HTMLInputElement>) =>
+                event.stopPropagation()
+              }
             />
             <span>
               <IconeRocket />
@@ -549,7 +556,7 @@ const ConfigCargo = ({ funcaoFechaModalConfigCargo }: Props) => {
             </span>
           </div>
           <div>
-          {showContentPropostas ? <IconeSetaBaixo /> : <IconeSetaDir /> }
+            {showContentPropostas ? <IconeSetaBaixo /> : <IconeSetaDir />}
           </div>
         </BoxPropostas>
 
@@ -613,7 +620,9 @@ const ConfigCargo = ({ funcaoFechaModalConfigCargo }: Props) => {
               tipo="checkbox"
               checked={analyticsValue}
               onChange={onChangeAnalytics}
-              onClick={(event:React.MouseEvent<HTMLInputElement>) => event.stopPropagation()}
+              onClick={(event: React.MouseEvent<HTMLInputElement>) =>
+                event.stopPropagation()
+              }
             />
             <span>
               <IconeRosca />
@@ -621,7 +630,7 @@ const ConfigCargo = ({ funcaoFechaModalConfigCargo }: Props) => {
             </span>
           </div>
           <div>
-          {showContentAnalytics ? <IconeSetaBaixo /> : <IconeSetaDir /> }
+            {showContentAnalytics ? <IconeSetaBaixo /> : <IconeSetaDir />}
           </div>
         </BoxAnalytics>
         {showContentAnalytics && (
@@ -661,7 +670,9 @@ const ConfigCargo = ({ funcaoFechaModalConfigCargo }: Props) => {
               tipo="checkbox"
               checked={operacaoValue}
               onChange={onChangeOperacao}
-              onClick={(event:React.MouseEvent<HTMLInputElement>) => event.stopPropagation()}
+              onClick={(event: React.MouseEvent<HTMLInputElement>) =>
+                event.stopPropagation()
+              }
             />
             <span>
               <IconeConfig />
@@ -669,7 +680,7 @@ const ConfigCargo = ({ funcaoFechaModalConfigCargo }: Props) => {
             </span>
           </div>
           <div>
-          {showContentOperacao ? <IconeSetaBaixo /> : <IconeSetaDir /> }
+            {showContentOperacao ? <IconeSetaBaixo /> : <IconeSetaDir />}
           </div>
         </BoxOperacao>
 
@@ -732,16 +743,16 @@ const ConfigCargo = ({ funcaoFechaModalConfigCargo }: Props) => {
               tipo="checkbox"
               checked={admValue}
               onChange={onChangeAdm}
-              onClick={(event:React.MouseEvent<HTMLInputElement>) => event.stopPropagation()}
+              onClick={(event: React.MouseEvent<HTMLInputElement>) =>
+                event.stopPropagation()
+              }
             />
             <span>
               <IconePasta />
               Administrativo
             </span>
           </div>
-          <div>
-          {showContentAdm ? <IconeSetaBaixo /> : <IconeSetaDir /> }
-          </div>
+          <div>{showContentAdm ? <IconeSetaBaixo /> : <IconeSetaDir />}</div>
         </BoxAdm>
         {showContentAdm && (
           <Content>
@@ -787,7 +798,9 @@ const ConfigCargo = ({ funcaoFechaModalConfigCargo }: Props) => {
               tipo="checkbox"
               checked={financeiroValue}
               onChange={onChangeFinanceiro}
-              onClick={(event:React.MouseEvent<HTMLInputElement>) => event.stopPropagation()}
+              onClick={(event: React.MouseEvent<HTMLInputElement>) =>
+                event.stopPropagation()
+              }
             />
             <span>
               <IconeDolar />
@@ -795,7 +808,7 @@ const ConfigCargo = ({ funcaoFechaModalConfigCargo }: Props) => {
             </span>
           </div>
           <div>
-          {showContentFinanceiro ? <IconeSetaBaixo /> : <IconeSetaDir /> }
+            {showContentFinanceiro ? <IconeSetaBaixo /> : <IconeSetaDir />}
           </div>
         </BoxFinanceiro>
         {showContentFinanceiro && (

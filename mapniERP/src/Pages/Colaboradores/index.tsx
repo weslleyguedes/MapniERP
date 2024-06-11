@@ -45,7 +45,6 @@ const BoxInput = styled.div`
   }
 `;
 
-
 const headers = ["Nome", "CPF", "Login", "Cargo", "Departamento", "Cidade"];
 const rows = [
   [
@@ -58,12 +57,12 @@ const rows = [
   ],
 ];
 
-const Rh = () => {
+const Colaboradores = () => {
   const [showModalColab, setShowModalColab] = useState<boolean>(false);
 
   const funcaoFechaModalCriarColab = () => {
-    setShowModalColab(false)
-  }
+    setShowModalColab(false);
+  };
 
   return (
     <Container>
@@ -78,12 +77,10 @@ const Rh = () => {
         </div>
       </TituloBotoes>
       {showModalColab && (
-          <Modal overlay={() => setShowModalColab(false)}>
-            <CriarColab
-            funcaoFechaModalCriarColab={funcaoFechaModalCriarColab}
-            />
-          </Modal>
-        )}
+        <Modal overlay={() => setShowModalColab(false)}>
+          <CriarColab funcaoFechaModalCriarColab={funcaoFechaModalCriarColab} />
+        </Modal>
+      )}
       <BoxInput>
         <CampoTexto tipo="text" placeholder="Pesquisar Colaborador" />
         <CampoSelect>
@@ -100,4 +97,4 @@ const Rh = () => {
   );
 };
 
-export default Rh;
+export default Colaboradores;
