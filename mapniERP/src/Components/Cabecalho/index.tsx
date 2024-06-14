@@ -30,8 +30,7 @@ import { BsCurrencyDollar } from "react-icons/bs";
 import { FaSackDollar } from "react-icons/fa6";
 import { IoPersonCircleOutline } from "react-icons/io5";
 
-
-const Container = styled.nav`
+const Container = styled.header`
   height: 70px;
   padding: 0 30px;
   background-color: var(--preto-padrao);
@@ -143,6 +142,7 @@ const Cabecalho = () => {
   return (
     <Container>
       <img src={LogoMapni} alt="logo mapni" />
+
 
       <ListaDeOpcoes>
         <LinkCSS to="/dashboard">

@@ -9,6 +9,7 @@ const Container = styled.div`
     padding: 9.5px;
     margin: 15px 0 5px 0;
     border: 1px solid var(--cinza-borda-input);
+    transition: 0.2s;
     &:hover {
       border: 1px solid var(--preto-padrao);
     }

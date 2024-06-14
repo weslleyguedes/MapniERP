@@ -5,7 +5,7 @@ import CampoTexto from "../Components/CampoTexto";
 import arrays from "../../arrays.json";
 import CampoSelect from "../Components/CampoSelect";
 import useFetch from "../useFetch";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { FaRegAddressCard } from "react-icons/fa6";
 import { BsHouseDoor } from "react-icons/bs";
 import { FaSquarePhone } from "react-icons/fa6";
@@ -340,8 +340,13 @@ interface Props {
 }
 
 const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
+  // MODAIS DE SHOW CONTEUDO
   const [showDadosPessoais, setShowDadosPessoais] = useState(true);
   const [showDadosProfissionais, setShowDadosProfissionais] = useState(false);
+
+  // MODAIS DE VALORES E MANIPULACOES
+
+  const [nomeColaborador, setNomeColaborador] = useState("");
 
   const [colabCEP, setColabCEP] = useState("");
   const [colabRua, setColabRua] = useState("");
@@ -352,6 +357,11 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
   // HOOK REQUISICAO API CEP
 
   const { dados } = useFetch({ cep: colabCEP });
+
+  const aoSalvar = (e:FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+  };
 
   const funcaoDadosPessoais = () => {
     setShowDadosProfissionais(false);
@@ -381,7 +391,7 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
         </div>
       </ContainerCabecalho>
 
-      <ContainerForm>
+      <ContainerForm noValidate onSubmit={() => aoSalvar}>
         {showDadosPessoais && (
           <ContainerDados>
             <ContainerDadosColab>
@@ -392,7 +402,11 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
               <Linha1Colab>
                 <div>
                   <label>Nome</label>
-                  <CampoTexto tipo="text" />
+                  <CampoTexto
+                  tipo="text"
+                  valor={nomeColaborador}
+                  onChange={(e) => setNomeColaborador(e.target.value)}
+                  />
                 </div>
                 <div>
                   <label>CPF</label>
@@ -787,7 +801,7 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
           </ContainerDadosProf>
         )}
         <ContainerBotoes>
-          <Botao>Salvar</Botao>
+          <Botao onClick={() => aoSalvar}>Salvar</Botao>
           <Botao>Cancelar</Botao>
         </ContainerBotoes>
       </ContainerForm>
