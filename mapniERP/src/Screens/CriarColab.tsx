@@ -360,7 +360,6 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
 
   const aoSalvar = (e:FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
   };
 
   const funcaoDadosPessoais = () => {
@@ -407,6 +406,7 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
                   valor={nomeColaborador}
                   onChange={(e) => setNomeColaborador(e.target.value)}
                   />
+                  {nomeColaborador}
                 </div>
                 <div>
                   <label>CPF</label>

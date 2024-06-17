@@ -67,7 +67,7 @@ const Colaboradores = () => {
   return (
     <Container>
       <TituloBotoes>
-        <h1>Recursos Humanos</h1>
+        <h1>Colaboradores</h1>
         <div>
           <Botao>up</Botao>
           <Botao onClick={() => setShowModalColab(true)}>
