@@ -61,7 +61,7 @@ const Colaboradores = () => {
   const [showModalColab, setShowModalColab] = useState<boolean>(false);
 
   const funcaoFechaModalCriarColab = () => {
-    setShowModalColab(false)
+    setShowModalColab(false);
   };
 
   return (
