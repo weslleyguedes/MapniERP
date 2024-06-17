@@ -18,7 +18,6 @@ const Container = styled.div`
   }
 `;
 interface Props {
-  label?: string;
   checked?: boolean;
   tipo: string;
   placeholder?: string;
@@ -34,7 +33,6 @@ interface Props {
 }
 
 const CampoTexto = ({
-  label,
   readOnly,
   checked,
   tipo,
@@ -50,7 +48,6 @@ const CampoTexto = ({
 }: Props) => {
   return (
     <Container>
-      <label htmlFor={id}>{label}</label>
       <input
         id={id}
         readOnly={readOnly}

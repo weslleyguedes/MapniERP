@@ -25,13 +25,11 @@ interface Props {
   children?: React.ReactNode;
   valor?: string;
   aoSelecionar?: (e: ChangeEvent<HTMLSelectElement>) => void;
-  label?: string;
 }
 
-const CampoSelect = ({ children, valor, aoSelecionar, label }: Props) => {
+const CampoSelect = ({ children, valor, aoSelecionar }: Props) => {
   return (
     <Container>
-      <label>{label}</label>
       <select value={valor} onChange={aoSelecionar}>
         {children}
       </select>

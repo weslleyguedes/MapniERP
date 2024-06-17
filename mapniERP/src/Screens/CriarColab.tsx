@@ -130,29 +130,16 @@ const Linha1Colab = styled.div`
   }
 `;
 const Linha2Colab = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 20px;
   margin-top: 15px;
-  & div:nth-child(1) input {
-    width: 100px;
-  }
-  & div:nth-child(4) select {
-    width: 165px;
-  }
-  & div:nth-child(5) select {
-    width: 165px;
-  }
 `;
 const Linha3Colab = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
   margin-top: 15px;
-  & > div:nth-child(2) input {
-    width: 290px;
-  }
-  & > div:nth-child(3) input {
-    width: 290px;
-  }
 `;
 const ContainerEnderecoColab = styled.div`
   margin-bottom: 25px;
@@ -341,25 +328,46 @@ interface Props {
 
 const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
   // MODAIS DE SHOW CONTEUDO
-  const [showDadosPessoais, setShowDadosPessoais] = useState(true);
-  const [showDadosProfissionais, setShowDadosProfissionais] = useState(false);
+  const [showDadosPessoais, setShowDadosPessoais] = useState<boolean>(true);
+  const [showDadosProfissionais, setShowDadosProfissionais] =
+    useState<boolean>(false);
 
   // MODAIS DE VALORES E MANIPULACOES
 
-  const [nomeColaborador, setNomeColaborador] = useState("");
+  // DADOS COLABORADOR
 
-  const [colabCEP, setColabCEP] = useState("");
-  const [colabRua, setColabRua] = useState("");
-  const [colabBairro, setColabBairro] = useState("");
-  const [colabCidade, setColabCidade] = useState("");
-  const [colabUF, setColabUF] = useState("");
+  const [nomeColaborador, setNomeColaborador] = useState<string>("");
+  const [cpfColaborador, setCpfColaborador] = useState<string>("");
+  const [rgColaborador, setRgColaborador] = useState<string>("");
+  const [dtExpRgColab, setDtExpRgColab] = useState<string>("");
+  const [orgaoEmissorColab, setOrgaoEmissorColab] = useState<string>("");
+  const [nomeConjugeColab, setNomeConjugeColab] = useState<string>("");
+  const [nomeMaeColab, setNomeMaeColab] = useState<string>("");
+  const [nomePaiColab, setNomePaiColab] = useState<string>("");
+
+  // ENDEREÇO COLABORADOR
+
+  const [colabCEP, setColabCEP] = useState<string>("");
+  const [colabRua, setColabRua] = useState<string>("");
+  const [numeroCasaColab, setNumeroCasaColab] = useState<string>("");
+  const [complementoColab, setComplementoColab] = useState<string>("");
+  const [colabBairro, setColabBairro] = useState<string>("");
+  const [colabCidade, setColabCidade] = useState<string>("");
+  const [colabUF, setColabUF] = useState<string>("");
+
+  // DADOS BANCARIOS COLAB
+  const [tipoContaColab, setTipoContaColab] = useState<string>("");
+  const [bancoColab, setBancoColab] = useState<string>("");
+  const [agenciaColab, setAgenciaColab] = useState<string>("");
+  const [contaColab, setContaColab] = useState<string>("");
+  const [chavePixColab, setChavePixColab] = useState<string>("");
 
   // HOOK REQUISICAO API CEP
 
   const { dados } = useFetch({ cep: colabCEP });
 
-  const aoSalvar = (e:FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const aoSalvar = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
   };
 
   const funcaoDadosPessoais = () => {
@@ -390,7 +398,7 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
         </div>
       </ContainerCabecalho>
 
-      <ContainerForm noValidate onSubmit={() => aoSalvar}>
+      <ContainerForm noValidate onSubmit={() => aoSalvar} autoComplete="off">
         {showDadosPessoais && (
           <ContainerDados>
             <ContainerDadosColab>
@@ -400,31 +408,51 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
               </TituloCSS>
               <Linha1Colab>
                 <div>
-                  <label>Nome</label>
+                  <label htmlFor="nomecolab">Nome</label>
                   <CampoTexto
-                  tipo="text"
-                  valor={nomeColaborador}
-                  onChange={(e) => setNomeColaborador(e.target.value)}
+                    tipo="text"
+                    valor={nomeColaborador}
+                    onChange={(e) => setNomeColaborador(e.target.value)}
+                    id="nomecolab"
                   />
-                  {nomeColaborador}
                 </div>
                 <div>
-                  <label>CPF</label>
-                  <CampoTexto tipo="text" />
+                  <label htmlFor="cpfcolab">CPF</label>
+                  <CampoTexto
+                    tipo="text"
+                    valor={cpfColaborador}
+                    onChange={(e) => setCpfColaborador(e.target.value)}
+                    id="cpfcolab"
+                  />
                 </div>
                 <div>
-                  <label>RG</label>
-                  <CampoTexto tipo="text" />
+                  <label htmlFor="rgcolab">RG</label>
+                  <CampoTexto
+                    tipo="text"
+                    valor={rgColaborador}
+                    onChange={(e) => setRgColaborador(e.target.value)}
+                    id="rgcolab"
+                  />
                 </div>
                 <div>
-                  <label>Data Expedição</label>
-                  <CampoTexto tipo="text" />
+                  <label htmlFor="dataexpcolab">Data Expedição</label>
+                  <CampoTexto
+                    tipo="text"
+                    valor={dtExpRgColab}
+                    onChange={(e) => setDtExpRgColab(e.target.value)}
+                    id="dataexpcolab"
+                  />
                 </div>
               </Linha1Colab>
               <Linha2Colab>
                 <div>
-                  <label>Orgão Emissor</label>
-                  <CampoTexto tipo="text" />
+                  <label htmlFor="orgaoemissor">Orgão Emissor</label>
+                  <CampoTexto
+                    tipo="text"
+                    valor={orgaoEmissorColab}
+                    onChange={(e) => setOrgaoEmissorColab(e.target.value)}
+                    id="orgaoemissor"
+                  />
                 </div>
                 <div>
                   <label>Estado</label>
@@ -438,10 +466,6 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
                       </option>
                     ))}
                   </CampoSelect>
-                </div>
-                <div>
-                  <label>RG</label>
-                  <CampoTexto tipo="text" />
                 </div>
                 <div>
                   <label>Sexo</label>
@@ -472,16 +496,31 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
               </Linha2Colab>
               <Linha3Colab>
                 <div>
-                  <label>Nome Cônjuge</label>
-                  <CampoTexto tipo="text" />
+                  <label htmlFor="nomeconjuge">Nome Cônjuge</label>
+                  <CampoTexto
+                    tipo="text"
+                    valor={nomeConjugeColab}
+                    onChange={(e) => setNomeConjugeColab(e.target.value)}
+                    id="nomeconjuge"
+                  />
                 </div>
                 <div>
-                  <label>Nome Mãe</label>
-                  <CampoTexto tipo="text" />
+                  <label htmlFor="nomemae">Nome Mãe</label>
+                  <CampoTexto
+                    tipo="text"
+                    valor={nomeMaeColab}
+                    onChange={(e) => setNomeMaeColab(e.target.value)}
+                    id="nomemae"
+                  />
                 </div>
                 <div>
-                  <label>Nome Pai</label>
-                  <CampoTexto tipo="text" />
+                  <label htmlFor="nomepai">Nome Pai</label>
+                  <CampoTexto
+                    tipo="text"
+                    valor={nomePaiColab}
+                    onChange={(e) => setNomePaiColab(e.target.value)}
+                    id="nomepai"
+                  />
                 </div>
               </Linha3Colab>
             </ContainerDadosColab>
@@ -493,15 +532,16 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
               </TituloCSS>
               <Linha1Endereco>
                 <div>
-                  <label>CEP</label>
+                  <label htmlFor="cep">CEP</label>
                   <CampoTexto
                     tipo="text"
                     valor={colabCEP}
                     onChange={(e) => setColabCEP(e.target.value)}
+                    id="cep"
                   />
                 </div>
                 <div>
-                  <label>Logradouro</label>
+                  <label htmlFor="rua">Logradouro</label>
                   <CampoTexto
                     valor={dados?.logradouro ? dados?.logradouro : colabRua}
                     onChange={
@@ -510,20 +550,31 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
                         : (e) => setColabRua(e.target.value)
                     }
                     tipo="text"
+                    id="rua"
                   />
                 </div>
                 <div>
-                  <label>Nº</label>
-                  <CampoTexto tipo="text" />
+                  <label htmlFor="numerocasa">Nº</label>
+                  <CampoTexto
+                    valor={numeroCasaColab}
+                    onChange={(e) => setNumeroCasaColab(e.target.value)}
+                    tipo="text"
+                    id="numerocasa"
+                  />
                 </div>
               </Linha1Endereco>
               <Linha2Endereco>
                 <div>
-                  <label>Complemento</label>
-                  <CampoTexto tipo="text" />
+                  <label htmlFor="complemento">Complemento</label>
+                  <CampoTexto
+                    tipo="text"
+                    valor={complementoColab}
+                    onChange={(e) => setComplementoColab(e.target.value)}
+                    id="complemento"
+                  />
                 </div>
                 <div>
-                  <label>Bairro</label>
+                  <label htmlFor="bairro">Bairro</label>
                   <CampoTexto
                     tipo="text"
                     valor={dados?.bairro ? dados?.bairro : colabBairro}
@@ -532,10 +583,11 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
                         ? undefined
                         : (e) => setColabBairro(e.target.value)
                     }
+                    id="bairro"
                   />
                 </div>
                 <div>
-                  <label>Cidade</label>
+                  <label htmlFor="cidade">Cidade</label>
                   <CampoTexto
                     tipo="text"
                     valor={dados?.localidade ? dados?.localidade : colabCidade}
@@ -544,16 +596,18 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
                         ? undefined
                         : (e) => setColabCidade(e.target.value)
                     }
+                    id="cidade"
                   />
                 </div>
                 <div>
-                  <label>Estado</label>
+                  <label htmlFor="estado">Estado</label>
                   <CampoTexto
                     valor={dados?.uf ? dados?.uf : colabUF}
                     onChange={
                       dados?.uf ? undefined : (e) => setColabUF(e.target.value)
                     }
                     tipo="text"
+                    id="estado"
                   />
                 </div>
               </Linha2Endereco>
@@ -566,8 +620,8 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
               </TituloCSS>
               <LinhaContatos>
                 <div>
-                  <label>Telefone</label>
-                  <CampoTexto tipo="text" />
+                  <label htmlFor="telefone">Telefone</label>
+                  <CampoTexto tipo="text" id="telefone" />
                 </div>
                 <div>
                   <label>Tipo</label>
@@ -603,7 +657,10 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
               <LinhaDadosBancarios>
                 <div>
                   <label>Tipo Conta</label>
-                  <CampoSelect>
+                  <CampoSelect
+                    valor={tipoContaColab}
+                    aoSelecionar={(e) => setTipoContaColab(e.target.value)}
+                  >
                     <option value="" disabled selected hidden>
                       Selecione...
                     </option>
@@ -615,19 +672,32 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
                 </div>
                 <div>
                   <label>Banco</label>
-                  <CampoSelect>
+                  <CampoSelect
+                    valor={bancoColab}
+                    aoSelecionar={(e) => setBancoColab(e.target.value)}
+                  >
                     <option value="" disabled selected hidden>
                       Selecione...
                     </option>
                   </CampoSelect>
                 </div>
                 <div>
-                  <label>Agência</label>
-                  <CampoTexto tipo="text" />
+                  <label htmlFor="agenciacolab">Agência</label>
+                  <CampoTexto
+                    tipo="text"
+                    valor={agenciaColab}
+                    onChange={(e) => setAgenciaColab(e.target.value)}
+                    id="agenciacolab"
+                  />
                 </div>
                 <div>
-                  <label>Conta</label>
-                  <CampoTexto tipo="text" />
+                  <label htmlFor="conta">Conta</label>
+                  <CampoTexto
+                    tipo="text"
+                    valor={contaColab}
+                    onChange={(e) => setContaColab(e.target.value)}
+                    id="conta"
+                  />
                 </div>
               </LinhaDadosBancarios>
               <LinhaChavePix>
@@ -644,8 +714,13 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
                   </CampoSelect>
                 </div>
                 <div>
-                  <label>Chave</label>
-                  <CampoTexto tipo="text" />
+                  <label htmlFor="chave">Chave</label>
+                  <CampoTexto
+                    tipo="text"
+                    valor={chavePixColab}
+                    onChange={(e) => setChavePixColab(e.target.value)}
+                    id="chave"
+                  />
                 </div>
               </LinhaChavePix>
             </ContainerDadosBancarios>
