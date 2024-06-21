@@ -134,16 +134,14 @@ const SubMenu = styled.ul<Props>`
 `;
 
 const Cabecalho = () => {
-  const [showAnalytics, setShowAnalytics] = useState(false);
-  const [showOperacao, setShowOperacao] = useState(false);
-  const [showAdm, setShowAdm] = useState(false);
-  const [showFinanceiro, setShowFinanceiro] = useState(false);
+  const [showAnalytics, setShowAnalytics] = useState<boolean>(false);
+  const [showOperacao, setShowOperacao] = useState<boolean>(false);
+  const [showAdm, setShowAdm] = useState<boolean>(false);
+  const [showFinanceiro, setShowFinanceiro] = useState<boolean>(false);
 
   return (
     <Container>
       <img src={LogoMapni} alt="logo mapni" />
-
-
       <ListaDeOpcoes>
         <LinkCSS to="/dashboard">
           <li>

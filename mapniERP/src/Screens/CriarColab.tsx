@@ -242,6 +242,9 @@ const BoxDiasSemana = styled.div`
   display: flex;
   flex-direction: column;
   margin-right: 8em;
+  label {
+    cursor: pointer;
+  }
   & > div {
     display: flex;
     gap: 5px;
@@ -260,6 +263,11 @@ const ContainerHoras = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
+  input {
+    width: 180px;
+    text-align: center;
+    cursor: pointer;
+  }
   h2 {
     text-align: center;
     display: flex;
@@ -297,7 +305,6 @@ const IconeLogin = styled(TbLogin2)`
   font-size: 16px;
 `;
 const ContainerBotoes = styled.div`
-  margin-top: 20px;
   display: flex;
   gap: 20px;
   button {
@@ -335,7 +342,6 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
   // MODAIS DE VALORES E MANIPULACOES
 
   // DADOS COLABORADOR
-
   const [nomeColaborador, setNomeColaborador] = useState<string>("");
   const [cpfColaborador, setCpfColaborador] = useState<string>("");
   const [rgColaborador, setRgColaborador] = useState<string>("");
@@ -346,7 +352,6 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
   const [nomePaiColab, setNomePaiColab] = useState<string>("");
 
   // ENDEREÇO COLABORADOR
-
   const [colabCEP, setColabCEP] = useState<string>("");
   const [colabRua, setColabRua] = useState<string>("");
   const [numeroCasaColab, setNumeroCasaColab] = useState<string>("");
@@ -361,13 +366,51 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
   const [agenciaColab, setAgenciaColab] = useState<string>("");
   const [contaColab, setContaColab] = useState<string>("");
   const [chavePixColab, setChavePixColab] = useState<string>("");
+  const [tipoChavePixColab, setTipoChavePixColab] = useState<string>("");
 
+  // DADOS PROFISSIONAIS
+  // LOGIN
+  const [loginColab, setLoginColab] = useState<string>("");
+  const [senhaColab, setSenhaColab] = useState<string>("");
+  const [repeteSenha, setRepeteSenha] = useState<string>("");
+  const [nomeUtilizado, setNomeUtilizado] = useState<string>("");
+
+  //  INFORMACOES PROFISSIONAIS
+  const [cargoColab, setCargoColab] = useState<string>("");
+  const [departamentoColab, setDepartamentoColab] = useState<string>("");
+  const [salarioColab, setSalarioColab] = useState<string>("");
+  const [emailColab, setEmailColab] = useState<string>("");
+  const [dataAdmissao, setDataAdmissao] = useState<string>("");
+  const [dataDemissao, setDataDemissao] = useState<string>("");
+  const [numeroPIS, setNumeroPIS] = useState<string>("");
+  const [numeroCTPS, setNumeroCTPS] = useState<string>("");
+
+  // CONFIGURACOES DE ACESSO
+
+  // DIAS DA SEMANA
+  const [segundaFeira, setSegundaFeira] = useState<boolean>(false);
+  const [tercaFeira, setTercaFeira] = useState<boolean>(false);
+  const [quartaFeira, setQuartaFeira] = useState<boolean>(false);
+  const [quintaFeira, setQuintaFeira] = useState<boolean>(false);
+  const [sextaFeira, setSextaFeira] = useState<boolean>(false);
+  const [sabado, setSabado] = useState<boolean>(false);
+  const [domingo, setDomingo] = useState<boolean>(false);
+
+  // HORARIOS
+  // SEG A SEXTA
+  const [inicio, setInicio] = useState<string>("");
+  const [fim, setFim] = useState<string>("");
+
+  // fins de semana
+  const [inicioFDS, setInicioFDS] = useState<string>("");
+  const [fimFDS, setFimFDS] = useState<string>("");
   // HOOK REQUISICAO API CEP
 
   const { dados } = useFetch({ cep: colabCEP });
 
   const aoSalvar = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log("enviado");
   };
 
   const funcaoDadosPessoais = () => {
@@ -703,7 +746,10 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
               <LinhaChavePix>
                 <div>
                   <label>Tipo Chave</label>
-                  <CampoSelect>
+                  <CampoSelect
+                    valor={tipoChavePixColab}
+                    aoSelecionar={(e) => setTipoChavePixColab(e.target.value)}
+                  >
                     <option value="" disabled selected hidden>
                       Selecione...
                     </option>
@@ -724,6 +770,10 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
                 </div>
               </LinhaChavePix>
             </ContainerDadosBancarios>
+            <ContainerBotoes>
+              <Botao onClick={() => aoSalvar}>Salvar</Botao>
+              <Botao>Cancelar</Botao>
+            </ContainerBotoes>
           </ContainerDados>
         )}
 
@@ -737,19 +787,39 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
               <Linha1Acesso>
                 <div>
                   <label htmlFor="login">Login</label>
-                  <CampoTexto tipo="text" id="login" />
+                  <CampoTexto
+                    tipo="text"
+                    valor={loginColab}
+                    onChange={(e) => setLoginColab(e.target.value)}
+                    id="login"
+                  />
                 </div>
                 <div>
                   <label htmlFor="senha">Senha</label>
-                  <CampoTexto tipo="password" id="senha" />
+                  <CampoTexto
+                    tipo="password"
+                    valor={senhaColab}
+                    onChange={(e) => setSenhaColab(e.target.value)}
+                    id="senha"
+                  />
                 </div>
                 <div>
                   <label htmlFor="repitasenha">Repita a Senha</label>
-                  <CampoTexto tipo="password" id="repitasenha" />
+                  <CampoTexto
+                    tipo="password"
+                    valor={repeteSenha}
+                    onChange={(e) => setRepeteSenha(e.target.value)}
+                    id="repitasenha"
+                  />
                 </div>
                 <div>
                   <label htmlFor="nomeutilizado">Nome Utilizado</label>
-                  <CampoTexto tipo="text" id="nomeutilizado" />
+                  <CampoTexto
+                    tipo="text"
+                    valor={nomeUtilizado}
+                    onChange={(e) => setNomeUtilizado(e.target.value)}
+                    id="nomeutilizado"
+                  />
                 </div>
               </Linha1Acesso>
             </BoxDadosAcesso>
@@ -761,7 +831,10 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
               <Linha1DadosProf>
                 <div>
                   <label>Cargo</label>
-                  <CampoSelect>
+                  <CampoSelect
+                    valor={cargoColab}
+                    aoSelecionar={(e) => setCargoColab(e.target.value)}
+                  >
                     <option value="" disabled selected hidden>
                       Selecione...
                     </option>
@@ -769,7 +842,10 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
                 </div>
                 <div>
                   <label>Departamento</label>
-                  <CampoSelect>
+                  <CampoSelect
+                    valor={departamentoColab}
+                    aoSelecionar={(e) => setDepartamentoColab(e.target.value)}
+                  >
                     <option value="" disabled selected hidden>
                       Selecione...
                     </option>
@@ -779,29 +855,59 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
               <Linha2DadosProf>
                 <div>
                   <label htmlFor="salario">Salário</label>
-                  <CampoTexto tipo="text" id="salario" />
+                  <CampoTexto
+                    tipo="text"
+                    valor={salarioColab}
+                    onChange={(e) => setSalarioColab(e.target.value)}
+                    id="salario"
+                  />
                 </div>
                 <div>
                   <label htmlFor="email">E-mail</label>
-                  <CampoTexto tipo="text" id="email" />
+                  <CampoTexto
+                    tipo="text"
+                    valor={emailColab}
+                    onChange={(e) => setEmailColab(e.target.value)}
+                    id="email"
+                  />
                 </div>
                 <div>
                   <label htmlFor="dataadmissao">Data Admissão</label>
-                  <CampoTexto tipo="text" id="dataadmissao" />
+                  <CampoTexto
+                    tipo="text"
+                    valor={dataAdmissao}
+                    onChange={(e) => setDataAdmissao(e.target.value)}
+                    id="dataadmissao"
+                  />
                 </div>
               </Linha2DadosProf>
               <Linha3DadosProf>
                 <div>
                   <label htmlFor="datademissao">Data Demissão</label>
-                  <CampoTexto tipo="text" id="datademissao" />
+                  <CampoTexto
+                    tipo="text"
+                    valor={dataDemissao}
+                    onChange={(e) => setDataDemissao(e.target.value)}
+                    id="datademissao"
+                  />
                 </div>
                 <div>
                   <label htmlFor="numeropispasep">Numero PIS/PASEP</label>
-                  <CampoTexto tipo="text" id="numeropispasep" />
+                  <CampoTexto
+                    tipo="text"
+                    valor={numeroPIS}
+                    onChange={(e) => setNumeroPIS(e.target.value)}
+                    id="numeropispasep"
+                  />
                 </div>
                 <div>
                   <label htmlFor="nseriectps">Nº Série CTPS</label>
-                  <CampoTexto tipo="text" id="nseriectps" />
+                  <CampoTexto
+                    tipo="text"
+                    valor={numeroCTPS}
+                    onChange={(e) => setNumeroCTPS(e.target.value)}
+                    id="nseriectps"
+                  />
                 </div>
               </Linha3DadosProf>
             </BoxDadosProf>
@@ -816,31 +922,66 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
                   Dias da Semana
                 </h2>
                 <div>
-                  <CampoTexto tipo="checkbox" id="segunda" />
+                  <CampoTexto
+                    tipo="checkbox"
+                    checked={segundaFeira}
+                    onChange={(e) => setSegundaFeira(e.target.checked)}
+                    id="segunda"
+                  />
                   <label htmlFor="segunda">Segunda-Feira</label>
                 </div>
                 <div>
-                  <CampoTexto tipo="checkbox" id="terca" />
+                  <CampoTexto
+                    tipo="checkbox"
+                    checked={tercaFeira}
+                    onChange={(e) => setTercaFeira(e.target.checked)}
+                    id="terca"
+                  />
                   <label htmlFor="terca">Terça-Feira</label>
                 </div>
                 <div>
-                  <CampoTexto tipo="checkbox" id="quarta" />
+                  <CampoTexto
+                    tipo="checkbox"
+                    checked={quartaFeira}
+                    onChange={(e) => setQuartaFeira(e.target.checked)}
+                    id="quarta"
+                  />
                   <label htmlFor="quarta">Quarta-Feira</label>
                 </div>
                 <div>
-                  <CampoTexto tipo="checkbox" id="quinta" />
+                  <CampoTexto
+                    tipo="checkbox"
+                    checked={quintaFeira}
+                    onChange={(e) => setQuintaFeira(e.target.checked)}
+                    id="quinta"
+                  />
                   <label htmlFor="quinta">Quinta-Feira</label>
                 </div>
                 <div>
-                  <CampoTexto tipo="checkbox" id="sexta" />
+                  <CampoTexto
+                    tipo="checkbox"
+                    checked={sextaFeira}
+                    onChange={(e) => setSextaFeira(e.target.checked)}
+                    id="sexta"
+                  />
                   <label htmlFor="sexta">Sexta-Feira</label>
                 </div>
                 <div>
-                  <CampoTexto tipo="checkbox" id="sabado" />
+                  <CampoTexto
+                    tipo="checkbox"
+                    checked={sabado}
+                    onChange={(e) => setSabado(e.target.checked)}
+                    id="sabado"
+                  />
                   <label htmlFor="sabado">Sábado</label>
                 </div>
                 <div>
-                  <CampoTexto tipo="checkbox" id="domingo" />
+                  <CampoTexto
+                    tipo="checkbox"
+                    checked={domingo}
+                    onChange={(e) => setDomingo(e.target.checked)}
+                    id="domingo"
+                  />
                   <label htmlFor="domingo">Domingo</label>
                 </div>
               </BoxDiasSemana>
@@ -853,32 +994,48 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
                 <BoxHorasSemana>
                   <div>
                     <label htmlFor="inicio1">Inicio</label>
-                    <CampoTexto tipo="text" id="inicio1" />
+                    <CampoTexto
+                      tipo="time"
+                      valor={inicio}
+                      onChange={(e) => setInicio(e.target.value)}
+                      id="inicio1"
+                    />
                   </div>
                   <div>
                     <label htmlFor="fim1">Fim</label>
-                    <CampoTexto tipo="text" id="fim1" />
+                    <CampoTexto
+                      tipo="time"
+                      valor={fim}
+                      onChange={(e) => setFim(e.target.value)}
+                      id="fim1"
+                    />
                   </div>
                 </BoxHorasSemana>
                 <h3>Fim de Semana</h3>
                 <BoxHorasFimSemana>
                   <div>
                     <label htmlFor="inicio2">Inicio</label>
-                    <CampoTexto tipo="text" id="inicio2" />
+                    <CampoTexto
+                      tipo="time"
+                      valor={inicioFDS}
+                      onChange={(e) => setInicioFDS(e.target.value)}
+                      id="inicio2"
+                    />
                   </div>
                   <div>
                     <label htmlFor="fim2">Fim</label>
-                    <CampoTexto tipo="text" id="fim2" />
+                    <CampoTexto
+                      tipo="time"
+                      valor={fimFDS}
+                      onChange={(e) => setFimFDS(e.target.value)}
+                      id="fim2"
+                    />
                   </div>
                 </BoxHorasFimSemana>
               </ContainerHoras>
             </BoxHorarioAcesso>
           </ContainerDadosProf>
         )}
-        <ContainerBotoes>
-          <Botao onClick={() => aoSalvar}>Salvar</Botao>
-          <Botao>Cancelar</Botao>
-        </ContainerBotoes>
       </ContainerForm>
     </Container>
   );
