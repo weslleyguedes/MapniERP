@@ -102,9 +102,12 @@ interface Dados {
 }
 
 const Cargos = () => {
-  const [abreModalCriarCargos, setAbreModalCriarCargos] = useState<boolean>(false);
-  const [abreModalConfigCargos, setAbreModalConfigCargos] = useState<boolean>(false);
-  const [AbreModalEditarCargos, setAbreModalEditarCargos] = useState<boolean>(false);
+  const [abreModalCriarCargos, setAbreModalCriarCargos] =
+    useState<boolean>(false);
+  const [abreModalConfigCargos, setAbreModalConfigCargos] =
+    useState<boolean>(false);
+  const [AbreModalEditarCargos, setAbreModalEditarCargos] =
+    useState<boolean>(false);
   const [cargos, setCargos] = useState<Dados[]>([]);
 
   const funcaoFechaModalCriarCargo = () => {
@@ -151,8 +154,6 @@ const Cargos = () => {
     ]
   );
 
-
-
   return (
     <Container>
       <BoxTituloBotoes>
@@ -165,7 +166,7 @@ const Cargos = () => {
           </Botao>
           <Botao onClick={() => setAbreModalCriarCargos(true)}>
             <FaPlus fontSize={12} />
-            Novo Cargo
+            Novo
           </Botao>
         </div>
       </BoxTituloBotoes>
@@ -194,7 +195,6 @@ const Cargos = () => {
         <Tabela headers={headers} rows={rows} />
       </div>
 
-
       {AbreModalEditarCargos && (
         <Modal width="400px">
           <EditarCargo
@@ -204,7 +204,11 @@ const Cargos = () => {
       )}
 
       {abreModalConfigCargos && (
-        <Modal width="500px" height="500px" overlay={() => setAbreModalConfigCargos(false)}>
+        <Modal
+          width="500px"
+          height="500px"
+          overlay={() => setAbreModalConfigCargos(false)}
+        >
           <ConfigCargo
             funcaoFechaModalConfigCargo={funcaoFechaModalConfigCargo}
           />

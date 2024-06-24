@@ -331,9 +331,20 @@ const ContainerBotoes = styled.div`
 
 interface Props {
   funcaoFechaModalCriarColab: () => void;
+  dadosColaborador: (
+    nomeColaborador: string,
+    cpfColaborador: string,
+    loginColab: string,
+    cargoColab: string,
+    departamentoColab: string,
+    colabCidade: string
+  ) => void;
 }
 
-const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
+const CriarColab = ({
+  funcaoFechaModalCriarColab,
+  dadosColaborador,
+}: Props) => {
   // MODAIS DE SHOW CONTEUDO
   const [showDadosPessoais, setShowDadosPessoais] = useState<boolean>(true);
   const [showDadosProfissionais, setShowDadosProfissionais] =
@@ -411,6 +422,15 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
   const aoSalvar = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("enviado");
+
+    dadosColaborador(
+      nomeColaborador,
+      cpfColaborador,
+      loginColab,
+      cargoColab,
+      departamentoColab,
+      colabCidade
+    );
   };
 
   const funcaoDadosPessoais = () => {
@@ -441,7 +461,7 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
         </div>
       </ContainerCabecalho>
 
-      <ContainerForm noValidate onSubmit={() => aoSalvar} autoComplete="off">
+      <ContainerForm noValidate onSubmit={aoSalvar} autoComplete="off">
         {showDadosPessoais && (
           <ContainerDados>
             <ContainerDadosColab>
@@ -772,7 +792,9 @@ const CriarColab = ({ funcaoFechaModalCriarColab }: Props) => {
             </ContainerDadosBancarios>
             <ContainerBotoes>
               <Botao onClick={() => aoSalvar}>Salvar</Botao>
-              <Botao>Cancelar</Botao>
+              <Botao onClick={() => funcaoFechaModalCriarColab()}>
+                Cancelar
+              </Botao>
             </ContainerBotoes>
           </ContainerDados>
         )}

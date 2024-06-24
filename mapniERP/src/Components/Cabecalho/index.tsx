@@ -137,7 +137,7 @@ const Cabecalho = () => {
   const [showAnalytics, setShowAnalytics] = useState<boolean>(false);
   const [showOperacao, setShowOperacao] = useState<boolean>(false);
   const [showAdm, setShowAdm] = useState<boolean>(false);
-  const [showFinanceiro, setShowFinanceiro] = useState<boolean>(false);
+  const [showFinanceiro, setShowFinanceiro] = useState(false);
 
   return (
     <Container>

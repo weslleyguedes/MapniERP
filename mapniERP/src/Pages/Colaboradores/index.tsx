@@ -45,24 +45,33 @@ const BoxInput = styled.div`
   }
 `;
 
-const headers = ["Nome", "CPF", "Login", "Cargo", "Departamento", "Cidade"];
-const rows = [
-  [
-    "WESLLEY GUEDES RIBEIRO",
-    "425.515.648-40",
-    "weslley.guedes",
-    "Operacional",
-    "Administratrivo",
-    "São Bernardo do Campo - SP",
-  ],
-];
-
 const Colaboradores = () => {
   const [showModalColab, setShowModalColab] = useState<boolean>(false);
 
   const funcaoFechaModalCriarColab = () => {
     setShowModalColab(false);
   };
+
+  const dadosColaborador = (
+    nomeColaborador: string,
+    cpfColaborador: string,
+    loginColab: string,
+    cargoColab: string,
+    departamentoColab: string,
+    colabCidade: string
+  ) => {};
+
+  const headers = ["Nome", "CPF", "Login", "Cargo", "Departamento", "Cidade"];
+  const rows = [
+    [
+      "WESLLEY GUEDES RIBEIRO",
+      "425.515.648-40",
+      "weslley.guedes",
+      "Operacional",
+      "Administratrivo",
+      "São Bernardo do Campo - SP",
+    ],
+  ];
 
   return (
     <Container>
@@ -72,13 +81,16 @@ const Colaboradores = () => {
           <Botao>up</Botao>
           <Botao onClick={() => setShowModalColab(true)}>
             <FaPlus />
-            Novo Colaborador
+            Novo
           </Botao>
         </div>
       </TituloBotoes>
       {showModalColab && (
         <Modal overlay={() => setShowModalColab(false)}>
-          <CriarColab funcaoFechaModalCriarColab={funcaoFechaModalCriarColab} />
+          <CriarColab
+            funcaoFechaModalCriarColab={funcaoFechaModalCriarColab}
+            dadosColaborador={dadosColaborador}
+          />
         </Modal>
       )}
       <BoxInput>

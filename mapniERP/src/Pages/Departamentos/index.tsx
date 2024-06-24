@@ -166,7 +166,7 @@ const Departamentos = () => {
           </Botao>
           <Botao onClick={() => setAbreModalDepart(!abreModalDepart)}>
             <FaPlus fontSize={12} />
-            Novo Departamento
+            Novo
           </Botao>
         </ContainerBotoes>
         {abreModalDepart && (
