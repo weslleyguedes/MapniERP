@@ -45,12 +45,25 @@ const BoxInput = styled.div`
   }
 `;
 
+interface Colabs {
+  nome: string;
+  cpf: string;
+  login: string;
+  cargo: string;
+  departamento: string;
+  cidade: string;
+  acoes: JSX.Element;
+}
+
 const Colaboradores = () => {
   const [showModalColab, setShowModalColab] = useState<boolean>(false);
+  const [colaboradores, setColaboradores] = useState<Colabs[]>([]);
 
   const funcaoFechaModalCriarColab = () => {
     setShowModalColab(false);
   };
+
+  // NOVO COLABORADOR
 
   const dadosColaborador = (
     nomeColaborador: string,
@@ -59,19 +72,43 @@ const Colaboradores = () => {
     cargoColab: string,
     departamentoColab: string,
     colabCidade: string
-  ) => {};
+  ) => {
+    const novoColaborador: Colabs = {
+      nome: nomeColaborador,
+      cpf: cpfColaborador,
+      login: loginColab,
+      cargo: cargoColab,
+      departamento: departamentoColab,
+      cidade: colabCidade,
+      acoes: <span></span>,
+    };
+    setColaboradores([...colaboradores, novoColaborador]);
+  };
 
-  const headers = ["Nome", "CPF", "Login", "Cargo", "Departamento", "Cidade"];
-  const rows = [
-    [
-      "WESLLEY GUEDES RIBEIRO",
-      "425.515.648-40",
-      "weslley.guedes",
-      "Operacional",
-      "Administratrivo",
-      "São Bernardo do Campo - SP",
-    ],
+  const arquivarColaborador = (index: number) => {
+    const novoColab = [...colaboradores];
+    novoColab.splice(index, 1);
+    setColaboradores(novoColab);
+  };
+
+  const headers: string[] = [
+    "Nome",
+    "CPF",
+    "Login",
+    "Cargo",
+    "Departamento",
+    "Cidade",
+    "Ações",
   ];
+  const rows: (string | JSX.Element)[][] = colaboradores.map((colaborador) => [
+    colaborador.nome,
+    colaborador.cpf,
+    colaborador.login,
+    colaborador.cargo,
+    colaborador.departamento,
+    colaborador.cidade,
+    colaborador.acoes,
+  ]);
 
   return (
     <Container>

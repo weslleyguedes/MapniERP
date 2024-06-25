@@ -431,6 +431,7 @@ const CriarColab = ({
       departamentoColab,
       colabCidade
     );
+    funcaoFechaModalCriarColab();
   };
 
   const funcaoDadosPessoais = () => {
@@ -860,6 +861,7 @@ const CriarColab = ({
                     <option value="" disabled selected hidden>
                       Selecione...
                     </option>
+                    <option value="teste">teste</option>
                   </CampoSelect>
                 </div>
                 <div>
@@ -871,6 +873,7 @@ const CriarColab = ({
                     <option value="" disabled selected hidden>
                       Selecione...
                     </option>
+                    <option value="teste">teste</option>
                   </CampoSelect>
                 </div>
               </Linha1DadosProf>
