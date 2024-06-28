@@ -11,7 +11,6 @@ import { RiProhibitedLine } from "react-icons/ri";
 import { GoGear } from "react-icons/go";
 import { GrUpdate } from "react-icons/gr";
 
-
 const Container = styled.div`
   margin: 20px 200px;
 `;
@@ -77,8 +76,8 @@ const IconeArquivar = styled(RiProhibitedLine)`
   }
 `;
 const IconeUpdate = styled(GrUpdate)`
-  transform:scale(0.95);
-`
+  transform: scale(0.95);
+`;
 
 interface Colabs {
   nome: string;
@@ -104,9 +103,9 @@ const Colaboradores = () => {
     setColaboradores(novoColab);
   };
 
-  const acoes = colaboradores.map((_,index) => (
+  const acoes = colaboradores.map((_, index) => (
     <BoxIcones key={index}>
-      <IconeArquivar onClick={() => arquivarColaborador(index)}/>
+      <IconeArquivar onClick={() => arquivarColaborador(index)} />
       <IconeEngrenagem />
     </BoxIcones>
   ));
@@ -140,22 +139,25 @@ const Colaboradores = () => {
     "Cidade",
     "Ações",
   ];
-  const rows: (string | JSX.Element)[][] = colaboradores.map((colaborador,index:number) => [
-    colaborador.nome,
-    colaborador.cpf,
-    colaborador.login,
-    colaborador.cargo,
-    colaborador.departamento,
-    colaborador.cidade,
-    <div key={index}>{acoes[index]}</div>
-  ]);
+  const rows: (string | JSX.Element)[][] = colaboradores.map(
+    (colaborador, index: number) => [
+      colaborador.nome,
+      colaborador.cpf,
+      colaborador.login,
+      colaborador.cargo,
+      colaborador.departamento,
+      colaborador.cidade,
+      <div key={index}>{acoes[index]}</div>,
+    ]
+  );
 
   return (
     <Container>
       <TituloBotoes>
         <h1>Colaboradores</h1>
         <div>
-          <Botao><IconeUpdate />
+          <Botao>
+            <IconeUpdate />
           </Botao>
           <Botao onClick={() => setShowModalColab(true)}>
             <FaPlus />
