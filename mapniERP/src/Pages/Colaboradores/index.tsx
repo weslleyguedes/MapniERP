@@ -101,7 +101,7 @@ const Colaboradores = () => {
     const novoColab = [...colaboradores];
     novoColab.splice(index, 1); // remove um unico item do indice em questao
     setColaboradores(novoColab);
-    // dqwdqwdqdqdqwdqwdqwdqwdqwdqwdqwdqwd teste
+    // wdqwdqwdqwdqwdqwdqwdqwdqwdwq teste
   };
 
   const acoes = colaboradores.map((_,index) => (
