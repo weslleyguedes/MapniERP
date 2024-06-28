@@ -11,7 +11,6 @@ import { RiProhibitedLine } from "react-icons/ri";
 import { GoGear } from "react-icons/go";
 import { GrUpdate } from "react-icons/gr";
 
-
 const Container = styled.div`
   margin: 20px 200px;
 `;
@@ -102,6 +101,7 @@ const Colaboradores = () => {
     const novoColab = [...colaboradores];
     novoColab.splice(index, 1); // remove um unico item do indice em questao
     setColaboradores(novoColab);
+    // dqwdqwdqdqdqwdqwdqwdqwdqwdqwdqwdqwd teste
   };
 
   const acoes = colaboradores.map((_,index) => (
