@@ -205,7 +205,7 @@ const Departamentos = () => {
       </BoxInputPesquisa>
 
       <div>
-        <Tabela headers={headers} rows={rows} />
+        <Tabela headers={headers} rows={rows} margin="20px 0"/>
       </div>
 
       {editarDepartamento && (

@@ -5,7 +5,7 @@ import CampoTexto from "../Components/CampoTexto";
 import arrays from "../../arrays.json";
 import CampoSelect from "../Components/CampoSelect";
 import useFetch from "../useFetch";
-import { FormEvent, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { FaRegAddressCard } from "react-icons/fa6";
 import { BsHouseDoor } from "react-icons/bs";
 import { FaSquarePhone } from "react-icons/fa6";
@@ -315,6 +315,9 @@ const ContainerBotoes = styled.div`
     color: white;
   }
 `;
+const MsgErro = styled.span`
+  color: var(--vermelho-erro);
+`;
 // const BoxBotoes = styled.div`
 //   margin-top: 25px;
 //   display: flex;
@@ -331,7 +334,7 @@ const ContainerBotoes = styled.div`
 
 interface Props {
   funcaoFechaModalCriarColab: () => void;
-  dadosColaborador: (
+  criarColaborador: (
     nomeColaborador: string,
     cpfColaborador: string,
     loginColab: string,
@@ -343,12 +346,14 @@ interface Props {
 
 const CriarColab = ({
   funcaoFechaModalCriarColab,
-  dadosColaborador,
+  criarColaborador,
 }: Props) => {
   // MODAIS DE SHOW CONTEUDO
   const [showDadosPessoais, setShowDadosPessoais] = useState<boolean>(true);
   const [showDadosProfissionais, setShowDadosProfissionais] =
     useState<boolean>(false);
+  const [nomeErro, setNomeErro] = useState(false);
+  const [CPFerro, setCPFerro] = useState(false);
 
   // MODAIS DE VALORES E MANIPULACOES
 
@@ -422,8 +427,15 @@ const CriarColab = ({
   const aoSalvar = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("enviado");
+    if (!nomeColaborador.trim()) {
+      setNomeErro(true);
+    }
+    if (!cpfColaborador.trim()) {
+      setCPFerro(true);
+      return;
+    }
 
-    dadosColaborador(
+    criarColaborador(
       nomeColaborador,
       cpfColaborador,
       loginColab,
@@ -441,6 +453,24 @@ const CriarColab = ({
   const funcaoDadosProfissionais = () => {
     setShowDadosPessoais(false);
     setShowDadosProfissionais(true);
+  };
+  const onChangeNome = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const valor = e.target.value.replace(/[^A-Za-zÀ-ÿ\s]/g, "");
+    setNomeColaborador(valor);
+    if (nomeErro && valor.trim()) {
+      setNomeErro(false);
+    }
+  };
+  const onChangeCPF = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const valor = e.target.value.replace(/\D/g, "");
+    const valorMask = valor.replace(
+      /^(\d{3})(\d{3})(\d{3})(\d{2}).*/,
+      "$1.$2.$3-$4"
+    );
+    setCpfColaborador(valorMask);
+    if (CPFerro && valorMask.trim() && valorMask.length === 14) {
+      setCPFerro(false);
+    }
   };
 
   return (
@@ -476,18 +506,21 @@ const CriarColab = ({
                   <CampoTexto
                     tipo="text"
                     valor={nomeColaborador}
-                    onChange={(e) => setNomeColaborador(e.target.value)}
+                    onChange={onChangeNome}
                     id="nomecolab"
                   />
+                  {nomeErro && <MsgErro>Campo Obrigatório</MsgErro>}
                 </div>
                 <div>
                   <label htmlFor="cpfcolab">CPF</label>
                   <CampoTexto
                     tipo="text"
                     valor={cpfColaborador}
-                    onChange={(e) => setCpfColaborador(e.target.value)}
+                    onChange={onChangeCPF}
+                    maxCaracteres={14}
                     id="cpfcolab"
                   />
+                  {CPFerro && <MsgErro>Campo Obrigatório</MsgErro>}
                 </div>
                 <div>
                   <label htmlFor="rgcolab">RG</label>

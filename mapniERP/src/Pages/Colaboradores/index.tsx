@@ -7,6 +7,10 @@ import Tabela from "../../Components/Tabela";
 import { useState } from "react";
 import Modal from "../../Components/Modal";
 import CriarColab from "../../Screens/CriarColab";
+import { RiProhibitedLine } from "react-icons/ri";
+import { GoGear } from "react-icons/go";
+import { GrUpdate } from "react-icons/gr";
+
 
 const Container = styled.div`
   margin: 20px 200px;
@@ -44,6 +48,37 @@ const BoxInput = styled.div`
     width: 150px;
   }
 `;
+const BoxIcones = styled.div`
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+`;
+const IconeEngrenagem = styled(GoGear)`
+  font-size: 18px;
+  cursor: pointer;
+  padding: 5px;
+  transition: 0.2s;
+  &:hover {
+    background-color: #dadada88;
+    border-radius: 50%;
+    transform: scale(1.05);
+  }
+`;
+const IconeArquivar = styled(RiProhibitedLine)`
+  font-size: 18px;
+  cursor: pointer;
+  padding: 5px;
+  transition: 0.2s;
+  &:hover {
+    background-color: #dadada88;
+    border-radius: 50%;
+    transform: scale(1.05);
+  }
+`;
+const IconeUpdate = styled(GrUpdate)`
+  transform:scale(0.95);
+`
 
 interface Colabs {
   nome: string;
@@ -63,9 +98,20 @@ const Colaboradores = () => {
     setShowModalColab(false);
   };
 
-  // NOVO COLABORADOR
+  const arquivarColaborador = (index: number) => {
+    const novoColab = [...colaboradores];
+    novoColab.splice(index, 1); // remove um unico item do indice em questao
+    setColaboradores(novoColab);
+  };
 
-  const dadosColaborador = (
+  const acoes = colaboradores.map((_,index) => (
+    <BoxIcones key={index}>
+      <IconeArquivar onClick={() => arquivarColaborador(index)}/>
+      <IconeEngrenagem />
+    </BoxIcones>
+  ));
+
+  const criarColaborador = (
     nomeColaborador: string,
     cpfColaborador: string,
     loginColab: string,
@@ -80,15 +126,9 @@ const Colaboradores = () => {
       cargo: cargoColab,
       departamento: departamentoColab,
       cidade: colabCidade,
-      acoes: <span></span>,
+      acoes: <span>{acoes}</span>,
     };
     setColaboradores([...colaboradores, novoColaborador]);
-  };
-
-  const arquivarColaborador = (index: number) => {
-    const novoColab = [...colaboradores];
-    novoColab.splice(index, 1);
-    setColaboradores(novoColab);
   };
 
   const headers: string[] = [
@@ -100,14 +140,14 @@ const Colaboradores = () => {
     "Cidade",
     "Ações",
   ];
-  const rows: (string | JSX.Element)[][] = colaboradores.map((colaborador) => [
+  const rows: (string | JSX.Element)[][] = colaboradores.map((colaborador,index:number) => [
     colaborador.nome,
     colaborador.cpf,
     colaborador.login,
     colaborador.cargo,
     colaborador.departamento,
     colaborador.cidade,
-    colaborador.acoes,
+    <div key={index}>{acoes[index]}</div>
   ]);
 
   return (
@@ -115,7 +155,8 @@ const Colaboradores = () => {
       <TituloBotoes>
         <h1>Colaboradores</h1>
         <div>
-          <Botao>up</Botao>
+          <Botao><IconeUpdate />
+          </Botao>
           <Botao onClick={() => setShowModalColab(true)}>
             <FaPlus />
             Novo
@@ -126,7 +167,7 @@ const Colaboradores = () => {
         <Modal overlay={() => setShowModalColab(false)}>
           <CriarColab
             funcaoFechaModalCriarColab={funcaoFechaModalCriarColab}
-            dadosColaborador={dadosColaborador}
+            criarColaborador={criarColaborador}
           />
         </Modal>
       )}

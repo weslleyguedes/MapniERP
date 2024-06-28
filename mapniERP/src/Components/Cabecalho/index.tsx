@@ -118,9 +118,8 @@ const SubMenu = styled.ul<Props>`
   z-index: 2;
   p {
     display: flex;
-    justify-content: center;
     gap: 8px;
-    padding: 12px 0;
+    padding: 12px 18px;
     margin: 0;
     &:hover {
       background-color: #00000049;
@@ -200,12 +199,12 @@ const Cabecalho = () => {
               Promotoras
             </p>
             <p>
-              <TbReportAnalytics className="subicone" />
-              Config. de Metas
+              <FaRegLightbulb className="subicone" />
+              Origem Vendas
             </p>
             <p>
-              <FaRegLightbulb className="subicone" />
-              Origem de Vendas
+              <TbReportAnalytics className="subicone" />
+              Config. de Metas
             </p>
           </SubMenu>
         </li>
