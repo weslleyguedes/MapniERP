@@ -109,7 +109,6 @@ const BoxBotoesEditarDepart = styled.div`
 interface Dados {
   nome: string;
   status: string;
-  acoes: JSX.Element;
 }
 
 const Departamentos = () => {
@@ -129,17 +128,9 @@ const Departamentos = () => {
     const novoDepartamento: Dados = {
       nome: nome,
       status: "Ativo",
-      acoes: <span>{icones}</span>,
     };
     setDepartamentos([...departamentos, novoDepartamento]);
   };
-
-  const icones = departamentos.map((_, index) => (
-    <BoxIcones key={index}>
-      <IconeLapis onClick={() => setEditarDepartamento(true)} />
-      <IconeArquivar onClick={() => arquivarDepartamento(index)} />
-    </BoxIcones>
-  ));
 
   const arquivarDepartamento = (index: number) => {
     const novosDepartamentos = [...departamentos];
@@ -152,7 +143,10 @@ const Departamentos = () => {
     (departamento, index: number) => [
       departamento.nome,
       departamento.status,
-      <div key={index}>{icones[index]}</div>,
+      <BoxIcones key={index}>
+        <IconeLapis onClick={() => setEditarDepartamento(true)} />
+        <IconeArquivar onClick={() => arquivarDepartamento(index)} />
+      </BoxIcones>,
     ]
   );
 
@@ -205,7 +199,7 @@ const Departamentos = () => {
       </BoxInputPesquisa>
 
       <div>
-        <Tabela headers={headers} rows={rows} margin="20px 0"/>
+        <Tabela headers={headers} rows={rows} margin="20px 0" />
       </div>
 
       {editarDepartamento && (

@@ -10,6 +10,7 @@ import CriarColab from "../../Screens/CriarColab";
 import { RiProhibitedLine } from "react-icons/ri";
 import { GoGear } from "react-icons/go";
 import { GrUpdate } from "react-icons/gr";
+import ConfigColab from "../../Screens/ConfigColab";
 
 const Container = styled.div`
   margin: 20px 200px;
@@ -78,7 +79,6 @@ const IconeArquivar = styled(RiProhibitedLine)`
 const IconeUpdate = styled(GrUpdate)`
   transform: scale(0.95);
 `;
-
 interface Colabs {
   nome: string;
   cpf: string;
@@ -86,30 +86,25 @@ interface Colabs {
   cargo: string;
   departamento: string;
   cidade: string;
-  acoes: JSX.Element;
 }
-
 const Colaboradores = () => {
   const [showModalColab, setShowModalColab] = useState<boolean>(false);
   const [colaboradores, setColaboradores] = useState<Colabs[]>([]);
+  const [modalConfigColab, setModalConfigColab] = useState<boolean>(false)
 
   const funcaoFechaModalCriarColab = () => {
     setShowModalColab(false);
   };
 
+  const fechaModalConfigColab = () => {
+    setModalConfigColab(false)
+  }
+
   const arquivarColaborador = (index: number) => {
     const novoColab = [...colaboradores];
     novoColab.splice(index, 1); // remove um unico item do indice em questao
     setColaboradores(novoColab);
-    //TESTE PELO DESKTOP
   };
-
-  const acoes = colaboradores.map((_, index) => (
-    <BoxIcones key={index}>
-      <IconeArquivar onClick={() => arquivarColaborador(index)} />
-      <IconeEngrenagem />
-    </BoxIcones>
-  ));
 
   const criarColaborador = (
     nomeColaborador: string,
@@ -126,7 +121,6 @@ const Colaboradores = () => {
       cargo: cargoColab,
       departamento: departamentoColab,
       cidade: colabCidade,
-      acoes: <span>{acoes}</span>,
     };
     setColaboradores([...colaboradores, novoColaborador]);
   };
@@ -148,7 +142,10 @@ const Colaboradores = () => {
       colaborador.cargo,
       colaborador.departamento,
       colaborador.cidade,
-      <div key={index}>{acoes[index]}</div>,
+      <BoxIcones key={index}>
+        <IconeArquivar onClick={() => arquivarColaborador(index)} />
+        <IconeEngrenagem onClick={() => setModalConfigColab(true)}/>
+      </BoxIcones>,
     ]
   );
 
@@ -185,6 +182,11 @@ const Colaboradores = () => {
 
       <div>
         <Tabela headers={headers} rows={rows} margin="20px 0" />
+        {modalConfigColab && (
+          <Modal overlay={() => setModalConfigColab(false)}>
+            <ConfigColab fechaModalConfigColab={fechaModalConfigColab}/>
+          </Modal>
+        )}
       </div>
     </Container>
   );

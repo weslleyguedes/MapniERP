@@ -98,7 +98,6 @@ const IconeConfig = styled(GoGear)`
 interface Dados {
   nome: string;
   status: string;
-  acoes: JSX.Element;
 }
 
 const Cargos = () => {
@@ -122,19 +121,10 @@ const Cargos = () => {
     setAbreModalConfigCargos(false);
   };
 
-  const iconesAcoes = cargos.map((_, index) => (
-    <BoxIcones key={index}>
-      <IconeEditar onClick={() => setAbreModalEditarCargos(true)} />
-      <IconeArquivar onClick={() => arquivarCargo(index)} />
-      <IconeConfig onClick={() => setAbreModalConfigCargos(true)} />
-    </BoxIcones>
-  ));
-
   const adicionarNovoCargo = (nome: string) => {
     const novoCargo: Dados = {
       nome: nome,
       status: "Ativo",
-      acoes: <span>{iconesAcoes}</span>,
     };
     setCargos([...cargos, novoCargo]);
   };
@@ -150,7 +140,11 @@ const Cargos = () => {
     (cargo, index: number) => [
       cargo.nome,
       cargo.status,
-      <div key={index}>{iconesAcoes[index]}</div>,
+      <BoxIcones key={index}>
+        <IconeEditar onClick={() => setAbreModalEditarCargos(true)} />
+        <IconeArquivar onClick={() => arquivarCargo(index)} />
+        <IconeConfig onClick={() => setAbreModalConfigCargos(true)} />
+      </BoxIcones>,
     ]
   );
 
