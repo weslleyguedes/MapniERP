@@ -108,19 +108,17 @@ const Cargos = () => {
   const [AbreModalEditarCargos, setAbreModalEditarCargos] =
     useState<boolean>(false);
   const [cargos, setCargos] = useState<Dados[]>([]);
+  const [cargoIndex, setCargoIndex] = useState<number>(0)
 
   const funcaoFechaModalCriarCargo = () => {
     setAbreModalCriarCargos(false);
   };
-
   const funcaoFechaModalEditarCargos = () => {
     setAbreModalEditarCargos(false);
   };
-
   const funcaoFechaModalConfigCargo = () => {
     setAbreModalConfigCargos(false);
   };
-
   const adicionarNovoCargo = (nome: string) => {
     const novoCargo: Dados = {
       nome: nome,
@@ -128,7 +126,10 @@ const Cargos = () => {
     };
     setCargos([...cargos, novoCargo]);
   };
-
+  const editarCargo = (index:number) => {
+    setCargoIndex(index);
+    setAbreModalEditarCargos(true);
+  };
   const arquivarCargo = (index: number) => {
     const novosCargos = [...cargos];
     novosCargos.splice(index, 1);
@@ -141,7 +142,7 @@ const Cargos = () => {
       cargo.nome,
       cargo.status,
       <BoxIcones key={index}>
-        <IconeEditar onClick={() => setAbreModalEditarCargos(true)} />
+        <IconeEditar onClick={() => editarCargo(index)} />
         <IconeArquivar onClick={() => arquivarCargo(index)} />
         <IconeConfig onClick={() => setAbreModalConfigCargos(true)} />
       </BoxIcones>,
@@ -186,13 +187,16 @@ const Cargos = () => {
       </BoxInputSelect>
 
       <div>
-        <Tabela headers={headers} rows={rows} />
+        <Tabela headers={headers} rows={rows} margin="20px 0" />
       </div>
 
       {AbreModalEditarCargos && (
         <Modal width="400px">
           <EditarCargo
             funcaoFechaModalEditarCargos={funcaoFechaModalEditarCargos}
+            cargos={cargos}
+            setCargos={setCargos}
+            cargoIndex={cargoIndex}
           />
         </Modal>
       )}
