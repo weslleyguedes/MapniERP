@@ -11,7 +11,7 @@ import { RiProhibitedLine } from "react-icons/ri";
 import { FaPlus } from "react-icons/fa6";
 import CampoSelect from "../../Components/CampoSelect";
 import BotaoFechar from "../../Components/BotaoFechar";
-import Banco from "../../Screens/Banco";
+import Produto from "../../Screens/Produto";
 
 const Container = styled.div`
   margin: 20px 200px;
@@ -85,14 +85,14 @@ const BoxTituloEFechaEditar = styled.div`
   justify-content: space-between;
   margin-bottom: 20px;
 `;
-const FormEditarBanco = styled.div`
+const FormEditar = styled.div`
   display: flex;
   flex-direction: column;
   input {
     margin-top: 8px;
   }
 `;
-const BoxBotoesEditarDepart = styled.div`
+const BoxBotoesEditar = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 5px;
@@ -111,41 +111,41 @@ interface Dados {
   status: string;
 }
 
-const Bancos = () => {
-  const [abreModalBancos, setAbreModalBancos] = useState(false);
-  const [bancos, setBancos] = useState<Dados[]>([]);
-  const [bancoSearch, setBancoSearch] = useState("");
-  const [statusBanco, setStatusBanco] = useState("");
-  const [editarBanco, setEditarBanco] = useState(false);
+const Produtos = () => {
+  const [abreModalProdutos, setAbreModalProdutos] = useState(false);
+  const [produtos, setProdutos] = useState<Dados[]>([]);
+  const [produtoSearch, setprodutoSearch] = useState("");
+  const [statusProduto, setStatusProduto] = useState("");
+  const [editarProduto, setEditarProduto] = useState(false);
 
   const [provisorio, setProvisorio] = useState("");
 
-  const FechaModalBancos = () => {
-    setAbreModalBancos(false);
+  const FechaModalProdutos = () => {
+    setAbreModalProdutos(false);
   };
 
-  const adicionarNovoBanco = (nome: string) => {
-    const novoBanco: Dados = {
+  const adicionarNovoProduto = (nome: string) => {
+    const novoProduto: Dados = {
       nome: nome,
       status: "Ativo",
     };
-    setBancos([...bancos, novoBanco]);
+    setProdutos([...produtos, novoProduto]);
   };
 
-  const arquivarBanco = (index: number) => {
-    const novosBancos = [...bancos];
-    novosBancos.splice(index, 1);
-    setBancos(novosBancos);
+  const arquivarProduto = (index: number) => {
+    const novosProduto = [...produtos];
+    novosProduto.splice(index, 1);
+    setProdutos(novosProduto);
   };
 
   const headers: (string | JSX.Element)[] = ["Nome", "Status", "Ações"];
-  const rows: (string | JSX.Element)[][] = bancos.map(
-    (banco, index: number) => [
-      banco.nome,
-      banco.status,
+  const rows: (string | JSX.Element)[][] = produtos.map(
+    (produto, index: number) => [
+      produto.nome,
+      produto.status,
       <BoxIcones key={index}>
-        <IconeLapis onClick={() => setEditarBanco(true)} />
-        <IconeArquivar onClick={() => arquivarBanco(index)} />
+        <IconeLapis onClick={() => setEditarProduto(true)} />
+        <IconeArquivar onClick={() => arquivarProduto(index)} />
       </BoxIcones>,
     ]
   );
@@ -153,24 +153,24 @@ const Bancos = () => {
   return (
     <Container>
       <ContainerTituloBotoes>
-        <Titulo>Bancos</Titulo>
+        <Titulo>Produtos</Titulo>
         <ContainerBotoes>
           <Botao>
             <IconeReload />
           </Botao>
-          <Botao onClick={() => setAbreModalBancos(!abreModalBancos)}>
+          <Botao onClick={() => setAbreModalProdutos(!abreModalProdutos)}>
             <FaPlus fontSize={12} />
             Novo
           </Botao>
         </ContainerBotoes>
-        {abreModalBancos && (
+        {abreModalProdutos && (
           <Modal
             width="400px"
-            overlay={() => setAbreModalBancos(!abreModalBancos)}
+            overlay={() => setAbreModalProdutos(!abreModalProdutos)}
           >
-            <Banco
-              FechaModalBancos={FechaModalBancos}
-              adicionarNovoBanco={adicionarNovoBanco}
+            <Produto
+              FechaModalProdutos={FechaModalProdutos}
+              adicionarNovoProduto={adicionarNovoProduto}
             />
           </Modal>
         )}
@@ -180,15 +180,15 @@ const Bancos = () => {
         <div>
           <CampoTexto
             tipo="text"
-            valor={bancoSearch}
-            onChange={(e) => setBancoSearch(e.target.value)}
-            placeholder="Pesquisar Banco"
+            valor={produtoSearch}
+            onChange={(e) => setprodutoSearch(e.target.value)}
+            placeholder="Pesquisar Produto"
           />
         </div>
         <div>
           <CampoSelect
-            valor={statusBanco}
-            aoSelecionar={(e) => setStatusBanco(e.target.value)}
+            valor={statusProduto}
+            aoSelecionar={(e) => setStatusProduto(e.target.value)}
           >
             <option value="ativos">Ativos</option>
             <option value="arquivados">Arquivados</option>
@@ -201,14 +201,14 @@ const Bancos = () => {
         <Tabela headers={headers} rows={rows} margin="20px 0" />
       </div>
 
-      {editarBanco && (
-        <Modal overlay={() => setEditarBanco(false)} width="400px">
+      {editarProduto && (
+        <Modal overlay={() => setEditarProduto(false)} width="400px">
           <BoxTituloEFechaEditar>
-            <Titulo>Editar Banco</Titulo>
-            <BotaoFechar onClick={() => setEditarBanco(false)} />
+            <Titulo>Editar Produto</Titulo>
+            <BotaoFechar onClick={() => setEditarProduto(false)} />
           </BoxTituloEFechaEditar>
 
-          <FormEditarBanco>
+          <FormEditar>
             <div>
               <label>Nome</label>
               <CampoTexto
@@ -218,19 +218,19 @@ const Bancos = () => {
               />
             </div>
 
-            <BoxBotoesEditarDepart>
+            <BoxBotoesEditar>
               <div>
                 <Botao>Salvar</Botao>
               </div>
               <div>
-                <Botao onClick={() => setEditarBanco(false)}>Cancelar</Botao>
+                <Botao onClick={() => setEditarProduto(false)}>Cancelar</Botao>
               </div>
-            </BoxBotoesEditarDepart>
-          </FormEditarBanco>
+            </BoxBotoesEditar>
+          </FormEditar>
         </Modal>
       )}
     </Container>
   );
 };
 
-export default Bancos;
+export default Produtos;

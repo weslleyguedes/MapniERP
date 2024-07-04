@@ -7,6 +7,9 @@ import Departamentos from "./Pages/Departamentos";
 import Cargos from "./Pages/Cargos";
 import Colaboradores from "./Pages/Colaboradores";
 import Bancos from "./Pages/Bancos";
+import Produtos from "./Pages/Produtos";
+import Operacoes from "./Pages/Operacoes";
+import Promotoras from "./Pages/Promotoras";
 
 const AppRoutes = () => {
   return (
@@ -20,6 +23,9 @@ const AppRoutes = () => {
           <Route path="/cargos" element={<Cargos />}></Route>
           <Route path="/colaboradores" element={<Colaboradores />}></Route>
           <Route path="/bancos" element={<Bancos />}></Route>
+          <Route path="/produtos" element={<Produtos />}></Route>
+          <Route path="/operacoes" element={<Operacoes />}></Route>
+          <Route path="/promotoras" element={<Promotoras />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

@@ -182,22 +182,30 @@ const Cabecalho = () => {
           <IconeEngrenagem className="icone" />
           Operação
           <SubMenu show={showOperacao}>
-            <p>
-              <HiOutlineBuildingLibrary className="subicone" fontSize={15} />
-              Bancos
-            </p>
-            <p>
-              <AiOutlineGlobal className="subicone" />
-              Produtos
-            </p>
-            <p>
-              <PiTargetDuotone className="subicone" />
-              Operações
-            </p>
-            <p>
-              <FaRegHandshake className="subicone" />
-              Promotoras
-            </p>
+            <LinkCSS to="/bancos">
+              <p>
+                <HiOutlineBuildingLibrary className="subicone" fontSize={15} />
+                Bancos
+              </p>
+            </LinkCSS>
+            <LinkCSS to="/produtos">
+              <p>
+                <AiOutlineGlobal className="subicone" />
+                Produtos
+              </p>
+            </LinkCSS>
+            <LinkCSS to="/operacoes">
+              <p>
+                <PiTargetDuotone className="subicone" />
+                Operações
+              </p>
+            </LinkCSS>
+            <LinkCSS to="promotoras">
+              <p>
+                <FaRegHandshake className="subicone" />
+                Promotoras
+              </p>
+            </LinkCSS>
             <p>
               <FaRegLightbulb className="subicone" />
               Origem Vendas

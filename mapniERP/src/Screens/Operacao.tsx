@@ -41,27 +41,27 @@ const MsgErro = styled.span`
   color: var(--vermelho-erro);
 `;
 interface Props {
-  FechaModalBancos: () => void;
-  adicionarNovoBanco: (nome: string) => void;
+  FechaModalOperacoes: () => void;
+  adicionarNovoProduto: (nome: string) => void;
 }
 
-const Banco = ({ FechaModalBancos, adicionarNovoBanco }: Props) => {
-  const [nomeBanco, setNomeBanco] = useState("");
+const Operacao = ({ FechaModalOperacoes, adicionarNovoProduto }: Props) => {
+  const [nomeOperacao, setNomeOperacao] = useState("");
   const [msgErro, setMsgErro] = useState(false);
 
   const aoSalvar = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (nomeBanco.trim() === "") {
+    if (nomeOperacao.trim() === "") {
       setMsgErro(true);
       return;
     }
-    adicionarNovoBanco(nomeBanco);
-    FechaModalBancos(); // fecha a modal
+    adicionarNovoProduto(nomeOperacao);
+    FechaModalOperacoes(); // fecha a modal
   };
 
   const aoAlterar = (e: ChangeEvent<HTMLInputElement>) => {
-    setNomeBanco(e.target.value);
-    if (nomeBanco === "") {
+    setNomeOperacao(e.target.value);
+    if (nomeOperacao === "") {
       setMsgErro(false);
     }
   };
@@ -69,8 +69,8 @@ const Banco = ({ FechaModalBancos, adicionarNovoBanco }: Props) => {
   return (
     <>
       <TituloBotao>
-        <h1>Adicionar Banco</h1>
-        <BotaoFechar onClick={() => FechaModalBancos()} />
+        <h1>Adicionar Operação</h1>
+        <BotaoFechar onClick={() => FechaModalOperacoes()} />
       </TituloBotao>
 
       <ContainerForm noValidate autoComplete="off" onSubmit={aoSalvar}>
@@ -78,7 +78,7 @@ const Banco = ({ FechaModalBancos, adicionarNovoBanco }: Props) => {
           <label>Nome</label>
           <CampoTexto
             tipo="text"
-            valor={nomeBanco}
+            valor={nomeOperacao}
             onChange={aoAlterar}
             maxCaracteres={35}
           />
@@ -87,11 +87,11 @@ const Banco = ({ FechaModalBancos, adicionarNovoBanco }: Props) => {
 
         <ContainerBotoes>
           <Botao onClick={() => aoSalvar}>Salvar</Botao>
-          <Botao onClick={() => FechaModalBancos()}>Cancelar</Botao>
+          <Botao onClick={() => FechaModalOperacoes()}>Cancelar</Botao>
         </ContainerBotoes>
       </ContainerForm>
     </>
   );
 };
 
-export default Banco;
+export default Operacao;

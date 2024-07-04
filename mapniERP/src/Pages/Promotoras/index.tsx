@@ -11,7 +11,7 @@ import { RiProhibitedLine } from "react-icons/ri";
 import { FaPlus } from "react-icons/fa6";
 import CampoSelect from "../../Components/CampoSelect";
 import BotaoFechar from "../../Components/BotaoFechar";
-import Banco from "../../Screens/Banco";
+import Promotora from "../../Screens/Promotora";
 
 const Container = styled.div`
   margin: 20px 200px;
@@ -60,6 +60,7 @@ const IconeLapis = styled(GoPencil)`
   cursor: pointer;
   padding: 5px;
   transition: 0.2s;
+  color: var(--azul-icones);
   &:hover {
     background-color: #dadada88;
     border-radius: 50%;
@@ -71,6 +72,7 @@ const IconeArquivar = styled(RiProhibitedLine)`
   cursor: pointer;
   padding: 5px;
   transition: 0.2s;
+  color: var(--vermelho-botao-cancelar);
   &:hover {
     background-color: #dadada88;
     border-radius: 50%;
@@ -85,14 +87,14 @@ const BoxTituloEFechaEditar = styled.div`
   justify-content: space-between;
   margin-bottom: 20px;
 `;
-const FormEditarBanco = styled.div`
+const FormEditar = styled.div`
   display: flex;
   flex-direction: column;
   input {
     margin-top: 8px;
   }
 `;
-const BoxBotoesEditarDepart = styled.div`
+const BoxBotoesEditar = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 5px;
@@ -111,41 +113,41 @@ interface Dados {
   status: string;
 }
 
-const Bancos = () => {
-  const [abreModalBancos, setAbreModalBancos] = useState(false);
-  const [bancos, setBancos] = useState<Dados[]>([]);
-  const [bancoSearch, setBancoSearch] = useState("");
-  const [statusBanco, setStatusBanco] = useState("");
-  const [editarBanco, setEditarBanco] = useState(false);
+const Promotoras = () => {
+  const [abreModalPromotoras, setAbreModalPromotoras] = useState(false);
+  const [promotoras, setPromotoras] = useState<Dados[]>([]);
+  const [promotoraSearch, setPromotoraSearch] = useState("");
+  const [statusPromotora, setStatusPromotora] = useState("");
+  const [editarPromotora, setEditarPromotora] = useState(false);
 
   const [provisorio, setProvisorio] = useState("");
 
-  const FechaModalBancos = () => {
-    setAbreModalBancos(false);
+  const FechaModalPromotora = () => {
+    setAbreModalPromotoras(false);
   };
 
-  const adicionarNovoBanco = (nome: string) => {
-    const novoBanco: Dados = {
+  const adicionarNovaPromotora = (nome: string) => {
+    const novaPromotora: Dados = {
       nome: nome,
       status: "Ativo",
     };
-    setBancos([...bancos, novoBanco]);
+    setPromotoras([...promotoras, novaPromotora]);
   };
 
-  const arquivarBanco = (index: number) => {
-    const novosBancos = [...bancos];
-    novosBancos.splice(index, 1);
-    setBancos(novosBancos);
+  const arquivarPromotora = (index: number) => {
+    const novasPromotoras = [...promotoras];
+    novasPromotoras.splice(index, 1);
+    setPromotoras(novasPromotoras);
   };
 
   const headers: (string | JSX.Element)[] = ["Nome", "Status", "Ações"];
-  const rows: (string | JSX.Element)[][] = bancos.map(
-    (banco, index: number) => [
-      banco.nome,
-      banco.status,
+  const rows: (string | JSX.Element)[][] = promotoras.map(
+    (promotora, index: number) => [
+      promotora.nome,
+      promotora.status,
       <BoxIcones key={index}>
-        <IconeLapis onClick={() => setEditarBanco(true)} />
-        <IconeArquivar onClick={() => arquivarBanco(index)} />
+        <IconeLapis onClick={() => setEditarPromotora(true)} />
+        <IconeArquivar onClick={() => arquivarPromotora(index)} />
       </BoxIcones>,
     ]
   );
@@ -153,24 +155,24 @@ const Bancos = () => {
   return (
     <Container>
       <ContainerTituloBotoes>
-        <Titulo>Bancos</Titulo>
+        <Titulo>Promotoras</Titulo>
         <ContainerBotoes>
           <Botao>
             <IconeReload />
           </Botao>
-          <Botao onClick={() => setAbreModalBancos(!abreModalBancos)}>
+          <Botao onClick={() => setAbreModalPromotoras(!abreModalPromotoras)}>
             <FaPlus fontSize={12} />
             Novo
           </Botao>
         </ContainerBotoes>
-        {abreModalBancos && (
+        {abreModalPromotoras && (
           <Modal
             width="400px"
-            overlay={() => setAbreModalBancos(!abreModalBancos)}
+            overlay={() => setAbreModalPromotoras(!abreModalPromotoras)}
           >
-            <Banco
-              FechaModalBancos={FechaModalBancos}
-              adicionarNovoBanco={adicionarNovoBanco}
+            <Promotora
+              FechaModalPromotora={FechaModalPromotora}
+              adicionarNovaPromotora={adicionarNovaPromotora}
             />
           </Modal>
         )}
@@ -180,19 +182,19 @@ const Bancos = () => {
         <div>
           <CampoTexto
             tipo="text"
-            valor={bancoSearch}
-            onChange={(e) => setBancoSearch(e.target.value)}
-            placeholder="Pesquisar Banco"
+            valor={promotoraSearch}
+            onChange={(e) => setPromotoraSearch(e.target.value)}
+            placeholder="Pesquisar Promotora"
           />
         </div>
         <div>
           <CampoSelect
-            valor={statusBanco}
-            aoSelecionar={(e) => setStatusBanco(e.target.value)}
+            valor={statusPromotora}
+            aoSelecionar={(e) => setStatusPromotora(e.target.value)}
           >
-            <option value="ativos">Ativos</option>
-            <option value="arquivados">Arquivados</option>
-            <option value="todos">Todos</option>
+            <option value="ativos">Ativas</option>
+            <option value="arquivados">Arquivadas</option>
+            <option value="todos">Todas</option>
           </CampoSelect>
         </div>
       </BoxInputPesquisa>
@@ -201,14 +203,14 @@ const Bancos = () => {
         <Tabela headers={headers} rows={rows} margin="20px 0" />
       </div>
 
-      {editarBanco && (
-        <Modal overlay={() => setEditarBanco(false)} width="400px">
+      {editarPromotora && (
+        <Modal overlay={() => setEditarPromotora(false)} width="400px">
           <BoxTituloEFechaEditar>
-            <Titulo>Editar Banco</Titulo>
-            <BotaoFechar onClick={() => setEditarBanco(false)} />
+            <Titulo>Editar Promotora</Titulo>
+            <BotaoFechar onClick={() => setEditarPromotora(false)} />
           </BoxTituloEFechaEditar>
 
-          <FormEditarBanco>
+          <FormEditar>
             <div>
               <label>Nome</label>
               <CampoTexto
@@ -218,19 +220,21 @@ const Bancos = () => {
               />
             </div>
 
-            <BoxBotoesEditarDepart>
+            <BoxBotoesEditar>
               <div>
                 <Botao>Salvar</Botao>
               </div>
               <div>
-                <Botao onClick={() => setEditarBanco(false)}>Cancelar</Botao>
+                <Botao onClick={() => setEditarPromotora(false)}>
+                  Cancelar
+                </Botao>
               </div>
-            </BoxBotoesEditarDepart>
-          </FormEditarBanco>
+            </BoxBotoesEditar>
+          </FormEditar>
         </Modal>
       )}
     </Container>
   );
 };
 
-export default Bancos;
+export default Promotoras;
