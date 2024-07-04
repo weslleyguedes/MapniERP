@@ -108,7 +108,7 @@ const Cargos = () => {
   const [AbreModalEditarCargos, setAbreModalEditarCargos] =
     useState<boolean>(false);
   const [cargos, setCargos] = useState<Dados[]>([]);
-  const [cargoIndex, setCargoIndex] = useState<number>(0)
+  const [cargoIndex, setCargoIndex] = useState<number>(0);
 
   const funcaoFechaModalCriarCargo = () => {
     setAbreModalCriarCargos(false);
@@ -126,7 +126,7 @@ const Cargos = () => {
     };
     setCargos([...cargos, novoCargo]);
   };
-  const editarCargo = (index:number) => {
+  const editarCargo = (index: number) => {
     setCargoIndex(index);
     setAbreModalEditarCargos(true);
   };
