@@ -10,8 +10,8 @@ import { TbReload } from "react-icons/tb";
 import { RiProhibitedLine } from "react-icons/ri";
 import { FaPlus } from "react-icons/fa6";
 import CampoSelect from "../../Components/CampoSelect";
-import BotaoFechar from "../../Components/BotaoFechar";
 import Operacao from "../../Screens/Operacao";
+import EditarOperacao from "../../Screens/EditarOperacao";
 
 const Container = styled.div`
   margin: 20px 200px;
@@ -60,6 +60,7 @@ const IconeLapis = styled(GoPencil)`
   cursor: pointer;
   padding: 5px;
   transition: 0.2s;
+  color: var(--azul-icones);
   &:hover {
     background-color: #dadada88;
     border-radius: 50%;
@@ -71,6 +72,7 @@ const IconeArquivar = styled(RiProhibitedLine)`
   cursor: pointer;
   padding: 5px;
   transition: 0.2s;
+  color: var(--vermelho-botao-cancelar);
   &:hover {
     background-color: #dadada88;
     border-radius: 50%;
@@ -80,31 +82,6 @@ const IconeArquivar = styled(RiProhibitedLine)`
 const IconeReload = styled(TbReload)`
   transform: scale(1.15);
 `;
-const BoxTituloEFechaEditar = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-`;
-const FormEditar = styled.div`
-  display: flex;
-  flex-direction: column;
-  input {
-    margin-top: 8px;
-  }
-`;
-const BoxBotoesEditar = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: 5px;
-  margin-top: 15px;
-  button {
-    background-color: var(--cinza-padrao);
-  }
-  & div:last-child button:hover {
-    background-color: var(--vermelho-botao-cancelar);
-    color: white;
-  }
-`;
 
 interface Dados {
   nome: string;
@@ -113,18 +90,21 @@ interface Dados {
 
 const Operacoes = () => {
   const [abreModalOperacoes, setAbreModalOperacoes] = useState(false);
+  const [abreModalEditarOperacao, setAbreModalEditarOperacao] = useState(false);
   const [operacoes, setOperacoes] = useState<Dados[]>([]);
   const [produtoSearch, setprodutoSearch] = useState("");
   const [statusOperacao, setStatusOperacao] = useState("");
-  const [editarOperacao, setEditarOperacao] = useState(false);
-
-  const [provisorio, setProvisorio] = useState("");
+  const [operacaoIndex, setOperacaoIndex] = useState<number>(0);
 
   const FechaModalOperacoes = () => {
     setAbreModalOperacoes(false);
   };
 
-  const adicionarNovoProduto = (nome: string) => {
+  const funcaoFechaModalEditarOperacao = () => {
+    setAbreModalEditarOperacao(false);
+  };
+
+  const adicionarNovaOperacao = (nome: string) => {
     const novaOperacao: Dados = {
       nome: nome,
       status: "Ativo",
@@ -137,6 +117,10 @@ const Operacoes = () => {
     novasOperacoes.splice(index, 1);
     setOperacoes(novasOperacoes);
   };
+  const editarOperacao = (index: number) => {
+    setOperacaoIndex(index);
+    setAbreModalEditarOperacao(true);
+  };
 
   const headers: (string | JSX.Element)[] = ["Nome", "Status", "Ações"];
   const rows: (string | JSX.Element)[][] = operacoes.map(
@@ -144,7 +128,7 @@ const Operacoes = () => {
       operacao.nome,
       operacao.status,
       <BoxIcones key={index}>
-        <IconeLapis onClick={() => setEditarOperacao(true)} />
+        <IconeLapis onClick={() => editarOperacao(index)} />
         <IconeArquivar onClick={() => arquivarOperacao(index)} />
       </BoxIcones>,
     ]
@@ -170,7 +154,7 @@ const Operacoes = () => {
           >
             <Operacao
               FechaModalOperacoes={FechaModalOperacoes}
-              adicionarNovoProduto={adicionarNovoProduto}
+              adicionarNovaOperacao={adicionarNovaOperacao}
             />
           </Modal>
         )}
@@ -201,32 +185,14 @@ const Operacoes = () => {
         <Tabela headers={headers} rows={rows} margin="20px 0" />
       </div>
 
-      {editarOperacao && (
-        <Modal overlay={() => setEditarOperacao(false)} width="400px">
-          <BoxTituloEFechaEditar>
-            <Titulo>Editar Operação</Titulo>
-            <BotaoFechar onClick={() => setEditarOperacao(false)} />
-          </BoxTituloEFechaEditar>
-
-          <FormEditar>
-            <div>
-              <label>Nome</label>
-              <CampoTexto
-                tipo="text"
-                valor={provisorio}
-                onChange={(e) => setProvisorio(e.target.value)}
-              />
-            </div>
-
-            <BoxBotoesEditar>
-              <div>
-                <Botao>Salvar</Botao>
-              </div>
-              <div>
-                <Botao onClick={() => setEditarOperacao(false)}>Cancelar</Botao>
-              </div>
-            </BoxBotoesEditar>
-          </FormEditar>
+      {abreModalEditarOperacao && (
+        <Modal overlay={() => setAbreModalEditarOperacao(false)} width="400px">
+          <EditarOperacao
+            operacaoIndex={operacaoIndex}
+            operacoes={operacoes}
+            setOperacoes={setOperacoes}
+            funcaoFechaModalEditarOperacao={funcaoFechaModalEditarOperacao}
+          />
         </Modal>
       )}
     </Container>

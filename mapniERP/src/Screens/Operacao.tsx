@@ -42,10 +42,10 @@ const MsgErro = styled.span`
 `;
 interface Props {
   FechaModalOperacoes: () => void;
-  adicionarNovoProduto: (nome: string) => void;
+  adicionarNovaOperacao: (nome: string) => void;
 }
 
-const Operacao = ({ FechaModalOperacoes, adicionarNovoProduto }: Props) => {
+const Operacao = ({ FechaModalOperacoes, adicionarNovaOperacao }: Props) => {
   const [nomeOperacao, setNomeOperacao] = useState("");
   const [msgErro, setMsgErro] = useState(false);
 
@@ -55,7 +55,7 @@ const Operacao = ({ FechaModalOperacoes, adicionarNovoProduto }: Props) => {
       setMsgErro(true);
       return;
     }
-    adicionarNovoProduto(nomeOperacao);
+    adicionarNovaOperacao(nomeOperacao);
     FechaModalOperacoes(); // fecha a modal
   };
 
