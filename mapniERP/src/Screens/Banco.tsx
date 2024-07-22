@@ -25,6 +25,10 @@ const InputCSS = styled.div`
       border: 1px solid var(--preto-padrao);
     }
   }
+  & div > span {
+    display: block;
+    margin-bottom: 5px;
+  }
 `;
 const ContainerBotoes = styled.div`
   display: flex;
@@ -42,27 +46,29 @@ const MsgErro = styled.span`
 `;
 interface Props {
   FechaModalBancos: () => void;
-  adicionarNovoBanco: (nome: string) => void;
+  adicionarNovoBanco: (nome: string, codigo: string) => void;
 }
 
 const Banco = ({ FechaModalBancos, adicionarNovoBanco }: Props) => {
-  const [nomeBanco, setNomeBanco] = useState("");
-  const [msgErro, setMsgErro] = useState(false);
+  const [nomeBanco, setNomeBanco] = useState<string>("");
+  const [codigoBanco, setCodigoBanco] = useState<string>("");
+  const [bancoEmpty, setBancoEmpty] = useState(false);
 
   const aoSalvar = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (nomeBanco.trim() === "") {
-      setMsgErro(true);
+      setBancoEmpty(true);
       return;
     }
-    adicionarNovoBanco(nomeBanco);
+
+    adicionarNovoBanco(nomeBanco, codigoBanco);
     FechaModalBancos(); // fecha a modal
   };
 
-  const aoAlterar = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeBanco = (e: ChangeEvent<HTMLInputElement>) => {
     setNomeBanco(e.target.value);
     if (nomeBanco === "") {
-      setMsgErro(false);
+      setBancoEmpty(false);
     }
   };
 
@@ -75,14 +81,25 @@ const Banco = ({ FechaModalBancos, adicionarNovoBanco }: Props) => {
 
       <ContainerForm noValidate autoComplete="off" onSubmit={aoSalvar}>
         <InputCSS>
-          <label>Nome</label>
-          <CampoTexto
-            tipo="text"
-            valor={nomeBanco}
-            onChange={aoAlterar}
-            maxCaracteres={35}
-          />
-          {msgErro && <MsgErro>Campo Obrigatório</MsgErro>}
+          <div>
+            <label>Nome</label>
+            <CampoTexto
+              tipo="text"
+              valor={nomeBanco}
+              onChange={onChangeBanco}
+              maxCaracteres={35}
+            />
+            <span>{bancoEmpty && <MsgErro>Campo Obrigatório</MsgErro>}</span>
+          </div>
+          <div>
+            <label>Código</label>
+            <CampoTexto
+              tipo="text"
+              valor={codigoBanco}
+              onChange={(e) => setCodigoBanco(e.target.value)}
+              maxCaracteres={35}
+            />
+          </div>
         </InputCSS>
 
         <ContainerBotoes>

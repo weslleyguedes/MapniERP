@@ -108,6 +108,7 @@ const BoxBotoesEditarDepart = styled.div`
 
 interface Dados {
   nome: string;
+  codigo: string;
   status: string;
 }
 
@@ -117,6 +118,7 @@ const Bancos = () => {
   const [bancoSearch, setBancoSearch] = useState("");
   const [statusBanco, setStatusBanco] = useState("");
   const [editarBanco, setEditarBanco] = useState(false);
+  const [codigoBanco, setCodigoBanco] = useState("");
 
   const [provisorio, setProvisorio] = useState("");
 
@@ -124,9 +126,10 @@ const Bancos = () => {
     setAbreModalBancos(false);
   };
 
-  const adicionarNovoBanco = (nome: string) => {
+  const adicionarNovoBanco = (nome: string, codigo: string) => {
     const novoBanco: Dados = {
       nome: nome,
+      codigo: codigo,
       status: "Ativo",
     };
     setBancos([...bancos, novoBanco]);
@@ -138,10 +141,16 @@ const Bancos = () => {
     setBancos(novosBancos);
   };
 
-  const headers: (string | JSX.Element)[] = ["Nome", "Status", "Ações"];
+  const headers: (string | JSX.Element)[] = [
+    "Nome",
+    "Código",
+    "Status",
+    "Ações",
+  ];
   const rows: (string | JSX.Element)[][] = bancos.map(
     (banco, index: number) => [
       banco.nome,
+      banco.codigo,
       banco.status,
       <BoxIcones key={index}>
         <IconeLapis onClick={() => setEditarBanco(true)} />
@@ -204,7 +213,7 @@ const Bancos = () => {
       {editarBanco && (
         <Modal overlay={() => setEditarBanco(false)} width="400px">
           <BoxTituloEFechaEditar>
-            <Titulo>Editar Banco</Titulo>
+            <Titulo>Editar</Titulo>
             <BotaoFechar onClick={() => setEditarBanco(false)} />
           </BoxTituloEFechaEditar>
 
@@ -215,6 +224,15 @@ const Bancos = () => {
                 tipo="text"
                 valor={provisorio}
                 onChange={(e) => setProvisorio(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>Código</label>
+              <CampoTexto
+                tipo="text"
+                valor={codigoBanco}
+                onChange={(e) => setCodigoBanco(e.target.value)}
+                maxCaracteres={35}
               />
             </div>
 
