@@ -11,6 +11,7 @@ import Produtos from "./Pages/Produtos";
 import Operacoes from "./Pages/Operacoes";
 import Promotoras from "./Pages/Promotoras";
 import OrigemVendas from "./Pages/OrigemVendas";
+import Relatorios from "./Pages/Relatorios";
 
 const AppRoutes = () => {
   return (
@@ -28,6 +29,7 @@ const AppRoutes = () => {
           <Route path="/operacoes" element={<Operacoes />}></Route>
           <Route path="/promotoras" element={<Promotoras />}></Route>
           <Route path="/origem-vendas" element={<OrigemVendas />}></Route>
+          <Route path="/relatorios" element={<Relatorios />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
