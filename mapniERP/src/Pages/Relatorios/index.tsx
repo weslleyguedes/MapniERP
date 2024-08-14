@@ -5,11 +5,13 @@ import { useState } from "react";
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-between;
-  margin-left: 10px;
+
+  margin-left: 0.8%;
 `;
 
 const BlocoEsquerdo = styled.div`
+  width: 85%;
+  border: 1px solid red;
   margin-top: 10px;
   button,
   input {
@@ -21,15 +23,18 @@ const Cabecalho = styled.div`
 `;
 
 const BlocoDireito = styled.div`
-  position: fixed;
-  bottom: 0;
-  right: 0;
+  display: flex;
+  flex-direction: column;
+  button {
+    margin-top: 10px;
+  }
+`;
+const SideBar = styled.div`
+  padding: 15px;
   border-top-left-radius: 10px;
   box-sizing: border-box;
   background-color: var(--preto-padrao);
   color: white;
-  width: 210px;
-  height: calc(-80px + 100vh);
   margin-top: 10px;
   border: 1px solid red;
 `;
@@ -38,20 +43,29 @@ const Relatorios = () => {
   const [buscaRelatorio, setBuscaRelatorio] = useState("");
 
   return (
-    <Container>
-      <BlocoEsquerdo>
-        <Cabecalho>
-          <Botao>FILTRO</Botao>
-          <CampoTexto
-            tipo="text"
-            valor={buscaRelatorio}
-            onChange={(e) => setBuscaRelatorio(e.target.value)}
-          />
-          <Botao>CALENDARIO</Botao>
-        </Cabecalho>
-      </BlocoEsquerdo>
-      <BlocoDireito>teste</BlocoDireito>
-    </Container>
+    <>
+      <Container>
+        <BlocoEsquerdo>
+          <Cabecalho>
+            <Botao>FILTRO</Botao>
+            <CampoTexto
+              tipo="text"
+              valor={buscaRelatorio}
+              onChange={(e) => setBuscaRelatorio(e.target.value)}
+            />
+            <Botao>CALENDARIO</Botao>
+          </Cabecalho>
+        </BlocoEsquerdo>
+        <BlocoDireito>
+          <div>
+            <Botao>INCLUIR</Botao>
+          </div>
+          <SideBar>
+            <span>teste</span>
+          </SideBar>
+        </BlocoDireito>
+      </Container>
+    </>
   );
 };
 
