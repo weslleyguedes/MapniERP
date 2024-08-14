@@ -10,8 +10,8 @@ const Container = styled.div`
 `;
 
 const BlocoEsquerdo = styled.div`
-  width: 85%;
-  border: 1px solid red;
+  width: 100%;
+  border: 1px solid black;
   margin-top: 10px;
   button,
   input {
@@ -23,10 +23,17 @@ const Cabecalho = styled.div`
 `;
 
 const BlocoDireito = styled.div`
+  width: 15%;
   display: flex;
   flex-direction: column;
+  border: 1px solid black;
+  margin: 0 10px 0 20px;
+  & > div:first-child {
+    text-align: center;
+  }
   button {
     margin-top: 10px;
+    width: 100%;
   }
 `;
 const SideBar = styled.div`
